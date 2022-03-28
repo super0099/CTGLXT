@@ -1,0 +1,368 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>订单查询</title>
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-4.1.3-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/app-assets/fonts/simple-line-icons/style.css" rel="stylesheet">
+    <style>
+        /* 去除 tab 标题背景和圆角 */
+        .nav-pills .nav-link {
+            border-bottom: 2px solid #ffffff;
+            border-radius: 0px;
+        }
+
+        /* 选中tab 标题下划线 */
+        .nav-pills .nav-link.active {
+            color: #000000;
+            background-color: white;
+            border-bottom: 2px solid #007bff;
+        }
+
+        select.form-control {
+            min-width: 221px;
+        }
+        div{
+            font-family: "华文彩云";
+        }
+        h4{
+            font-family: "华文彩云";
+        }
+        h5{
+            font-family: "华文彩云";
+        }
+        p{
+            font-family: "华文彩云";
+        }
+         label{
+            font-family: "华文彩云";
+        }
+        input{
+            font-family: "华文彩云";
+        }
+        tr{
+            font-family: "华文彩云";
+        }
+        td{
+            font-family: "华文彩云";
+        }
+        th{
+            font-family: "华文彩云";
+        }
+        b{
+            font-family: "华文彩云";
+        }
+        button{
+            font-family: "华文彩云";
+        }
+        a{
+            font-family: "华文彩云";
+        }
+        h2{
+            font-family: "华文彩云";
+        }
+        dd{
+            font-family: "华文彩云";
+        }
+        span{
+            font-family: "华文彩云";
+        }
+        select{
+            font-family: "华文彩云";
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <h2>订单查询</h2>
+            </div>
+        </div>
+        @* 查询部分 表单 *@
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-9">
+                <ul class="nav nav-pills mb-3" id="pills-tab">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tab-select-one" data-toggle="pill" href="#pane-select-one" role="tab" aria-selected="true">查询一</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-select-two" data-toggle="pill" href="#pane-select-two" role="tab" aria-selected="false">查询二</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-select-three" data-toggle="pill" href="#pane-select-three" role="tab" aria-selected="false">查询三</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pane-select-one" aria-labelledby="pills-home-tab">
+                        <form class="form-inline justify-content-between ml-3">
+                            <div class="form-group mb-2">
+                                <label class="col-form-label mr-3" for="searchOrderNo">订单号<sup class="text-danger">*</sup>:</label>
+                                <input type="text" class="form-control" id="searchOrderNo" placeholder="请输入订单号">
+                            </div>
+                            <button type="button" class="btn btn-primary  mb-2" id="btnSearchOne">查询</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade show" id="pane-select-two" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <form class="form-inline">
+                            <div class="form-group mb-2">
+                                <label class="col-form-label mr-1" for="searchUserGroupNumber">用户组号 <sup class="text-danger">*</sup>:</label>
+                                <select class="form-control mr-2" id="searchUserGroupNumber"></select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-form-label mr-1" for="searchJobNumber">用户工号<sup class="text-danger">&nbsp;</sup>:</label>
+                                <input type="text" class="form-control mr-2" id="searchJobNumber">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-form-label mr-1" for="searchStartDate">起始日期 <sup class="text-danger">*</sup>:</label>
+                                <input type="text" class="form-control mr-2 myLayDate" id="searchStartDate" placeholder="请选择起始日期(必填)">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-form-label mr-1" for="searchEndDate">终止日期 <sup class="text-danger">&nbsp;</sup>:</label>
+                                <input type="text" class="form-control mr-2 myLayDate" id="searchEndDate" placeholder="请选择终止日期">
+                            </div>
+                            <button type="button" class="btn btn-primary mb-2" id="btnSearchTwo">查询</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade show" id="pane-select-three" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <form class="form-inline">
+                            <div class="form-group mb-2">
+                                <label class="col-form-label ml-2" for="searchPNRNo"> P N R 号 <sup class="text-danger">*</sup>:</label>
+                                <input type="text" class="form-control mr-2" id="searchPNRNo" placeholder="请输入PNR号(必填)">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-form-label mr-1" for="searchUserGroupNumber2">用户组号 <sup class="text-danger">*</sup>:</label>
+                                <select class="form-control mr-2" id="searchUserGroupNumber2"></select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-form-label mr-1" for="searchJobNumber2">用户工号<sup class="text-danger">&nbsp;</sup>:</label>
+                                <input type="text" class="form-control mr-2" id="searchJobNumber2">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-form-label mr-1" for="searchStartDate2">起始日期 <sup class="text-danger">*</sup>:</label>
+                                <input type="text" class="form-control mr-2 myLayDate" id="searchStartDate2" placeholder="请选择起始日期(必填)">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-form-label mr-1" for="searchEndDate2">终止日期 <sup class="text-danger">&nbsp;</sup>:</label>
+                                <input type="text" class="form-control mr-2 myLayDate" id="searchEndDate2" placeholder="请选择终止日期">
+                            </div>
+
+                            <button type="button" class="btn btn-primary mb-2" id="btnSearchThree">查询</button>
+                        </form>
+                    </div>
+                </div>
+                @* 表格显示查询结果 *@
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table" lay-filter="tabOrder" id="tabOrder"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/bootstrap-4.1.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/layui/layui.js"></script>
+    <script src="~/Content/js/customfunction.js"></script>
+    <script src="~/Content/js/xm-select.js"></script>
+    <script>
+        var layer, layuiTable, tabOrder;        
+        $(function () {
+            //加载layui模块
+            layui.use(['layer', 'table', 'laydate'], function () {
+                layer = layui.layer;
+                layuiTable = layui.table;
+                laydate = layui.laydate;
+                //渲染表格
+                tabOrder = layuiTable.render({
+                    elem: '#tabOrder',//数据加载存放到id为tabOrder的表格里
+                    url: 'doSelectOrder',//请求的方法
+                    cols: [[//表头行
+                        { type: "numbers", title: "序号", align: "center" },
+                            { templet: customOrderNo, title: "订单号", align: "center", width: 185 },
+                            { templet: customPNRNo, title: "PNR", align: "center", width: 115 },
+                            { field: 'totalPrice', title: "总金额", align: "center" },
+                            { field: 'agencyFee', title: "代理费", align: "center" },
+                            { field: 'payMoney', title: "实付金额", align: "center" },
+                            { field: 'userGroupNumber', title: "用户组", align: "center" },
+                            { field: 'jobNumber', title: "工号", align: "center" },
+                            { templet: customPayDate, title: "支付日期", align: "center", width: 103 }
+                    ]],
+                    page: true//分页
+                });
+
+                //初始化日期控件
+                $(".myLayDate").each(function () {
+                    laydate.render({
+                        elem: this,
+                        type: 'date',
+                        btns: ['now', 'confirm'],
+                        trigger: 'click'
+                    });
+                });
+            });
+            //下拉框数据绑定，创建好的方法
+            createSelect("searchUserGroupNumber", "selectUserGroup");
+            createSelect("searchUserGroupNumber2", "selectUserGroup");
+
+            //查询一点击事件
+            $("#btnSearchOne").click(function () {
+                var orderNum = $("#searchOrderNo").val();
+                //表格重载
+                tabOrder.reload({
+                    where: {
+                        orderNum: orderNum,//订单号
+                        userGroupID: 0,
+                        jobNumber: "",
+                        startDate: "",
+                        endDate: "",
+                        PNRNo: ""
+                    },
+                    page: {
+                        curr: 1//重新从第一页开始
+                    }
+                });
+            });
+
+            //查询二点击事件
+            $("#btnSearchTwo").click(function () {
+                //获取查询参数
+                //用户组号
+                var userGroupID = $("#searchUserGroupNumber").val();
+                //工号
+                var jobNumber = $("#searchJobNumber").val();
+                //起始日期
+                var startDate = $("#searchStartDate").val();
+                //终止日期
+                var endDate = $("#searchEndDate").val();
+                //==数据验证--用户组和起始日期不能为空
+                if (userGroupID == undefined || userGroupID == "") {
+                    myAlert("请选择用户组");
+                    return;
+                }
+                if (startDate == undefined || startDate == "") {
+                    myAlert("请选择起始日期");
+                    return;
+                }
+                //===工号和终止日期可以不填写，但是要处理未填写的情况
+
+                if (jobNumber == undefined || jobNumber == "") {
+                    jobNumber = "";
+                }
+                if (endDate == undefined || endDate == "") {
+                    endDate = "";
+                }
+
+                //表格重载
+                tabOrder.reload({
+                    where: {
+                        orderNum: "",
+                        userGroupID: userGroupID,
+                        jobNumber: jobNumber,
+                        startDate: startDate,
+                        endDate: endDate,
+                        PNRNo: ""
+                    },
+                    page: {
+                        curr: 1
+                    }
+                });
+            });
+            //查询三点击事件
+            $("#btnSearchThree").click(function () {
+                //获取查询参数
+                //PNR
+                var pnrNo = $("#searchPNRNo").val();
+                //用户组号
+                var userGroupID = $("#searchUserGroupNumber2").val();
+                //工号
+                var jobNumber = $("#searchJobNumber2").val();
+                //起始日期
+                var startDate = $("#searchStartDate2").val();
+                //终止日期
+                var endDate = $("#searchEndDate2").val();
+
+                //数据验证
+                //PNR编号号&用户组以及起始日期不能为空
+                if (pnrNo == undefined || pnrNo == "") {
+                    myAlert("请填写PNR");
+                    return;
+                }
+                if (userGroupID == undefined || userGroupID == "") {
+                    myAlert("请选择用户组");
+                    return;
+                }
+                if (startDate == undefined || startDate == "") {
+                    myAlert("请选择起始日期");
+                    return;
+                }
+                //===工号和终止日期可以不填写，但是要处理未填写的情况
+
+                if (jobNumber == undefined || jobNumber == "") {
+                    jobNumber = "";
+                }
+                if (endDate == undefined || endDate == "") {
+                    endDate = "";
+                }
+
+                //表格重载
+                tabOrder.reload({
+                    where: {
+                        orderNum: "",
+                        userGroupID: userGroupID,
+                        jobNumber: jobNumber,
+                        startDate: startDate,
+                        endDate: endDate,
+                        PNRNo: pnrNo
+                    },
+                    page: {
+                        curr: 1
+                    }
+                });
+
+            });
+        });
+        //自定义列
+        //订单编号
+        function customOrderNo(rowData) {
+            return '<button type="button" class="btn btn-link" onclick="selectOrderInfor(' + rowData.orderID + ')">' + rowData.orderNo + '</button>';        
+            console.log(rowData);
+        }
+        //PNR编号
+        function customPNRNo(rowData) {
+            return '<button type="button" class="btn btn-link" onclick="openPNRInfoShow(' + rowData.PNRID + ')">' + rowData.PNRNo + '</button>';
+            console.log(rowData)
+        }
+        //支付日期
+        function customPayDate(rowData) {
+            console.log(rowData);
+            if (rowData.payTime != null && rowData.payTime != undefined && rowData.payTime != "") {
+                var date = new Date(parseInt(rowData.payTime.replace("/Date(", "").replace(")/", "")));
+                var month = (date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1);
+                var curDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                return date.getFullYear() + "-" + month + "-" + curDate;
+            }
+            //如果payTime为空，则返回“”
+            return "";
+        }
+        
+        //订单编号点击事件
+        function selectOrderInfor(orderID) {
+            window.location.replace("OrderInfoShow?orderID=" + orderID);
+        }
+        
+        //PNR编号点击事件
+        function openPNRInfoShow(PNRID) {
+            console.log(PNRID)
+            window.location.replace("openPNRInfoShow?PNRID=" + PNRID);
+        }
+    </script>
+</body>
+</html>

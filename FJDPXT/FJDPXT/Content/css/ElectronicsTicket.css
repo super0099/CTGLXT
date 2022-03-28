@@ -1,0 +1,33 @@
+﻿/*公共部分*/
+body {
+    border-radius:5px;
+    background-color:#fff;
+    box-shadow:0px 2px 2px #e3e4e8;
+    /*border-bottom: 6px solid #e3e4e8;
+    border-right: 6px solid #e3e4e8;*/
+}
+.content {   
+    /*margin-left:15%;
+    margin-right:15%;*/
+    border-top:2px solid #ced4da;
+}
+
+.card-header {
+    text-align:left;
+    font-weight:700;
+    color:#666;
+    padding: 0.25rem 1.75rem;
+}
+.card-body {      
+    flex: 1 1 auto;
+    padding: 0.35rem 0.75rem;
+}
+p {
+     background-color: #EFEFEF;
+     margin: 8px 0px;
+     padding-left:20px;
+     padding-top:2px;
+}
+
+
+

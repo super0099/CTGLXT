@@ -1,0 +1,412 @@
+﻿@using FJDPXT.Models
+@{
+    Layout = null;
+    List<S_Airport> dbAirports = ViewBag.dbAirport;
+    List<S_CertificatesType> dbCertificatesTypes = ViewBag.dbCertificatesType;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>票证查询 / 修改</title>
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-4.1.3-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/app-assets/fonts/simple-line-icons/style.css" rel="stylesheet" />
+    <link href="~/Content/css/ElectronicsTicket.css" rel="stylesheet" />
+    <style>
+        /* 去除 tab 标题背景和圆角 */
+        .nav-pills .nav-link {
+            border-bottom: 2px solid #ffffff;
+            border-radius: 0px;
+        }
+
+            /* 选中tab 标题下划线 */
+            .nav-pills .nav-link.active {
+                color: #000000;
+                background-color: white;
+                border-bottom: 2px solid #007bff;
+            }
+
+        select.form-control {
+            min-width: 221px;
+        }
+        div{
+            font-family: "华文彩云";
+        }
+        h4{
+            font-family: "华文彩云";
+        }
+        h5{
+            font-family: "华文彩云";
+        }
+        p{
+            font-family: "华文彩云";
+        }
+         label{
+            font-family: "华文彩云";
+        }
+        input{
+            font-family: "华文彩云";
+        }
+        tr{
+            font-family: "华文彩云";
+        }
+        td{
+            font-family: "华文彩云";
+        }
+        th{
+            font-family: "华文彩云";
+        }
+        b{
+            font-family: "华文彩云";
+        }
+        button{
+            font-family: "华文彩云";
+        }
+        a{
+            font-family: "华文彩云";
+        }
+        h2{
+            font-family: "华文彩云";
+        }
+        dd{
+            font-family: "华文彩云";
+        }
+        span{
+            font-family: "华文彩云";
+        }
+        select{
+            font-family: "华文彩云";
+        }
+    </style>
+</head>
+<body>
+    <div class="container pb-5">
+        <h4 class="text-center py-3">电子票证查询</h4>
+        <div class="content">
+            @* 查询部分 表单 *@
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-12 col-lg-12">
+                    <ul class="nav nav-pills mb-3" id="pills-tab">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="tab-select-one" data-toggle="pill" href="#pane-select-one" role="tab" aria-selected="true">查询一</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tab-select-two" data-toggle="pill" href="#pane-select-two" role="tab" aria-selected="false">查询二</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tab-select-three" data-toggle="pill" href="#pane-select-three" role="tab" aria-selected="false">查询三</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tab-select-four" data-toggle="pill" href="#pane-select-four" role="tab" aria-selected="false">查询四</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tab-select-five" data-toggle="pill" href="#pane-select-five" role="tab" aria-selected="false">查询五</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <!--查询1-->
+                        <div class="tab-pane fade show active" id="pane-select-one" aria-labelledby="pills-home-tab">
+                            <form class="form-inline justify-content-between ml-3">
+                                <div class="form-group mb-2">
+                                    <label class="form-check-label mr-3" for="flightDate">航班日期 <sup class="text-danger">*</sup>:</label>
+                                    <input type="text" class="form-control myLayDate" id="flightDate" placeholder="请选择航班日期">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="form-check-label mr-3" for="orange">起飞机场 <sup class="text-danger">*</sup>:</label>
+                                    <select id="orange" name="city" lay-verify="" lay-search class="form-control cf-city">
+                                        <option value="0">---请选择---</option>
+                                        @foreach (S_Airport dbAirport in dbAirports)
+                                        {
+                                            <option value="@dbAirport.airportID">@dbAirport.airportCode (@dbAirport.airportName)</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="form-check-label mr-3" for="destination">到达机场 <sup class="text-danger">*</sup>:</label>
+                                    <select id="destination" name="city2" lay-verify="" lay-search class="form-control ow-city">
+                                        <option value="0">---请选择---</option>
+                                        @foreach (S_Airport dbAirport in dbAirports)
+                                        {
+                                            <option value="@dbAirport.airportID">@dbAirport.airportCode (@dbAirport.airportName)</option>
+                                        }
+                                    </select>
+
+                                </div>
+                                <button type="button" class="btn btn-primary  mb-2" id="btnSearchOne">查询</button>
+                            </form>
+                        </div>
+                        <!--查询2-->
+                        <div class="tab-pane fade show" id="pane-select-two" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <form class="form-inline justify-content-between ml-3">
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label mr-3" for="orderNo">PNR编号<sup class="text-danger">*</sup>:</label>
+                                    <input type="text" class="form-control mr-2" id="PNRNo" placeholder="请输入PNR编号">
+                                </div>
+                                <button type="button" class="btn btn-primary mb-2" id="btnSearchTwo">查询</button>
+                            </form>
+                        </div>
+                        <!--查询3-->
+                        <div class="tab-pane fade show" id="pane-select-three" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <form class="form-inline justify-content-between ml-3">
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label mr-3" for="ticketNo">机票号码<sup class="text-danger">*</sup>:E781-</label>
+                                    <input type="text" class="form-control mr-2" id="ticketNo" placeholder="如：0000000001">
+                                </div>
+                                <button type="button" class="btn btn-primary mb-2" id="btnSearchThree">查询</button>
+                            </form>
+                        </div>
+                        <!--查询4-->
+                        <div class="tab-pane fade show" id="pane-select-four" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <form class="form-inline justify-content-between ml-3">
+                                <div class="form-group mb-2">
+                                    <label class="form-check-label mr-3" for="flightCode">航班号 <sup class="text-danger">*</sup>:</label>
+                                    <input type="text" class="form-control" id="flightCode" placeholder="如：MU1314">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label mr-1" for="StarTime">起始日期 <sup class="text-danger">*</sup>:</label>
+                                    <input type="text" class="form-control mr-2 myLayDate" id="StarTime" placeholder="请选择起始日期">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label mr-1" for="EndTime">终止日期 <sup class="text-danger">&nbsp;</sup>:</label>
+                                    <input type="text" class="form-control mr-2 myLayDate" id="EndTime" placeholder="请选择终止日期">
+                                </div>
+
+                                <button type="button" class="btn btn-primary mb-2" id="btnSearchFour">查询</button>
+                            </form>
+                        </div>
+                        <!--查询5-->
+                        <div class="tab-pane fade show" id="pane-select-five" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <form class="form-inline justify-content-between ml-3">
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label mr-3" for="certificatesTypeID">证件类型<sup class="text-danger">*</sup>:</label>
+                                    <select name="certificatesType" id="certificatesTypeID" lay-verify="" lay-search class="form-control cf-city">
+                                        <option value="0">---请选择---</option>
+                                        @foreach (S_CertificatesType dbCertificatesType in dbCertificatesTypes)
+                                        {
+                                            <option value="@dbCertificatesType.certificatesTypeID">@dbCertificatesType.certificatesType</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label mr-3" for="certificatesCode">证件号码<sup class="text-danger">*</sup>:</label>
+                                    <input type="text" class="form-control mr-2" id="certificatesCode" placeholder="请输入证件号码(必填)">
+                                </div>
+                                <button type="button" class="btn btn-primary mb-2" id="btnSearchFive">查询</button>
+                            </form>
+                        </div>
+                    </div>
+                    @* 表格显示查询结果 *@
+                    <div class="row">
+                        <div class="col-12">
+                            <table class="table" lay-filter="tabResultList" id="tabResultList"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/bootstrap-4.1.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/layui/layui.js"></script>
+    <script src="~/Content/js/customfunction.js"></script>
+    <script src="~/Content/js/xm-select.js"></script>
+    <script>
+        var layuiTable,layDate;
+        var tabResultList;
+
+        $(function () {
+            layui.use(['table','laydate'], function () {
+                layuiTable = layui.table;
+                layDate = layui.laydate;
+
+                //初始数据表格
+                tabResultList = layuiTable.render({
+                    elem: '#tabResultList',
+                    url: 'SelectTickets',
+                    cols: [
+                        [//表头
+                            { type: 'numbers', title: '序号' },
+                            { templet: customTicketNo, title: '票号', width: 170, align: "center" },
+                            { field: 'flightCode', title: '航班号', width: 100, align: "center" },
+                            { templet: customPNRNo, title: 'PNR', width: 105, align: "center" },
+                            { field: 'TicketingTime', title: '出票日期', width: 110, align: "center" },
+                            { field: 'JobNumber', title: '工号', width: 100, align: "center" },
+                            { field: 'cabinTypeName', title: '舱位等级', width: 95, align: "center" },
+                            { field: 'passengerName', title: '旅客姓名', width: 90, align: "center" },
+                            { field: 'certificatesCode', title: '证件号码', width: 180, align: "center" },
+                            { field: 'passengerType', title: '旅客类型', width: 105, align: "center" }
+                        ]
+                    ],
+                    page: true
+                });
+
+                //初始化多个日历插件
+                $(".myLayDate").each(function () {
+                    layDate.render({
+                        elem: this,
+                        type: 'date',
+                        btns: ['clear', 'confirm'],
+                        trigger: 'click'
+                    });
+                });
+            });
+
+            //查询按钮点击事件
+            //查询一（航班日期，起飞机场，到达机场）
+            $("#btnSearchOne").click(function () {
+                //获取查询条件
+                var flightDate = $("#flightDate").val();
+                var orangeAirportId = $("#orange").val();
+                var destinationAirportId = $("#destination").val();
+
+                //数据验证
+                if (orangeAirportId != 0 && destinationAirportId != 0 && orangeAirportId == destinationAirportId) {
+                    myAlert("出发机场和到达机场一样，请检查！");
+                    return;
+                }
+
+                //重载表格数据
+                tabResultList.reload({
+                    where: {
+                        flightDate: flightDate,
+                        orangeAirportId: orangeAirportId,
+                        destinationAirportId: destinationAirportId,
+                        //申明等于空的作用是为了解决缓存问题
+                        PNRNo: "",
+                        ticketNo: "",
+                        flightCode: "",
+                        StarTime: "",
+                        EndTime: "",
+                        certificatesTypeID: 0,
+                        certificatesCode: ""
+                    },
+                    page: {
+                        curr: 1
+                    }
+                });
+            });
+            //查询二（PNR编号）
+            $("#btnSearchTwo").click(function () {
+                //获取查询条件
+                var PNRNo = $("#PNRNo").val();
+
+                //表格重载
+                tabResultList.reload({
+                    where: {
+                        flightDate: "",
+                        orangeAirportId: 0,
+                        destinationAirportId: 0,
+                        PNRNo: PNRNo,
+                        ticketNo: "",
+                        flightCode: "",
+                        StarTime: "",
+                        EndTime: "",
+                        certificatesTypeID: 0,
+                        certificatesCode: ""
+                    },
+                    page: {
+                        curr: 1
+                    }
+                });
+            });
+            //查询三（机票号）
+            $("#btnSearchThree").click(function () {
+                //获取查询条件
+                var ticketNo = $("#ticketNo").val();
+
+                //表格重载
+                tabResultList.reload({
+                    where: {
+                        flightDate: "",
+                        orangeAirportId: 0,
+                        destinationAirportId: 0,
+                        PNRNo: "",
+                        ticketNo: ticketNo,
+                        flightCode: "",
+                        StarTime: "",
+                        EndTime: "",
+                        certificatesTypeID: 0,
+                        certificatesCode: ""
+                    },
+                    page: {
+                        curr: 1
+                    }
+                });
+            });
+            //查询四（航班号，起始日期，终止日期）
+            $("#btnSearchFour").click(function () {
+                //获取查询条件
+                var flightCode = $("#flightCode").val();
+                var StarTime = $("#StarTime").val();
+                var EndTime = $("#EndTime").val();
+
+                //表格重载
+                tabResultList.reload({
+                    where: {
+                        flightDate: "",
+                        orangeAirportId: 0,
+                        destinationAirportId: 0,
+                        PNRNo: "",
+                        ticketNo: "",
+                        flightCode: flightCode,
+                        StarTime: StarTime,
+                        EndTime: EndTime,
+                        certificatesTypeID: 0,
+                        certificatesCode: ""
+                    },
+                    page: {
+                        curr: 1
+                    }
+                });
+            });
+            //查询五（证件类型、证件号码）
+            $("#btnSearchFive").click(function () {
+                //获取查询条件
+                var certificatesTypeID = $("#certificatesTypeID").val();
+                var certificatesCode = $("#certificatesCode").val();
+
+                //表格重载
+                tabResultList.reload({
+                    where: {
+                        flightDate: "",
+                        orangeAirportId: 0,
+                        destinationAirportId: 0,
+                        PNRNo: "",
+                        ticketNo: "",
+                        flightCode: "",
+                        StarTime: "",
+                        EndTime: "",
+                        certificatesTypeID: certificatesTypeID,
+                        certificatesCode: certificatesCode
+                    },
+                    page: {
+                        curr: 1
+                    }
+                });
+            });
+        });
+
+        //自定义列
+        //票号
+        function customTicketNo(rowData) {
+            return "<button type='button' class='btn btn-link' onclick='ETicket(" + rowData.ETicketID + ")'>" + rowData.ticketNo + "</button>";
+        }
+        //PNR编号
+        function customPNRNo(rowData) {
+            return "<button type='button' class='btn btn-link' onclick='PNRan("+rowData.PNRID+")'>" + rowData.PNRNo + "</button>";
+        }
+        function PNRan(PNRID) {
+            window.location.replace("@Url.Content("~/PNR/SelectOrder/openPNRInfoShow?PNRID=")" + PNRID);
+            sessionStorage.setItem("gaibian", "true");
+        }
+        function ETicket(ETicketID) {
+            window.location.replace("@Url.Content("~/ElectronicsTicket/TicketModify/showTicketInfor?ETicketID=")" + ETicketID);
+        }
+
+
+    </script>
+</body>
+</html>

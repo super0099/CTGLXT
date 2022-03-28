@@ -1,0 +1,311 @@
+﻿@using FJDPXT.Models
+@{
+    Layout = null;
+    B_PNR pnrInfor = ViewBag.pnr;
+    List<B_PNRPassenger> passengerInfors = ViewBag.dbPassenger;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title id="pageTitle">行程单</title>
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-4.1.3-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/app-assets/fonts/simple-line-icons/style.css" rel="stylesheet">
+    <style>
+        .show-print {
+            display: none;
+        }
+        /*网页打印下的样式 用于隐藏一些不用打印的元素*/
+        @@media print {
+            .no-print {
+                display: none;
+            }
+
+            .show-print {
+                display: inline-block;
+            }
+        }
+        div{
+            font-family: "华文彩云";
+        }
+        h4{
+            font-family: "华文彩云";
+        }
+        h5{
+            font-family: "华文彩云";
+        }
+        p{
+            font-family: "华文彩云";
+        }
+         label{
+            font-family: "华文彩云";
+        }
+        input{
+            font-family: "华文彩云";
+        }
+        tr{
+            font-family: "华文彩云";
+        }
+        td{
+            font-family: "华文彩云";
+        }
+        th{
+            font-family: "华文彩云";
+        }
+        b{
+            font-family: "华文彩云";
+        }
+        button{
+            font-family: "华文彩云";
+        }
+        a{
+            font-family: "华文彩云";
+        }
+        h2{
+            font-family: "华文彩云";
+        }
+        dd{
+            font-family: "华文彩云";
+        }
+        span{
+            font-family: "华文彩云";
+        }
+        select{
+            font-family: "华文彩云";
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <h3>中国东方航空股份有限公司电子客票行程单</h3>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-12 col-md-10 col-lg-8">
+                <p>出票单位名称：中国东方航空公司有限公司上海营业部</p>
+                <p>出票单位电话：（021）62471763</p>
+                <p>出票单位地址：中国上海延安西路200号</p>
+                <div class="card">
+                    <div class="card-header no-print">
+                        <div class="row justify-content-between">
+                            <b>PNR:<span>@pnrInfor.PNRNo</span></b>
+                            <button type="button" class="btn btn-sm btn-primary no-print" onclick="doPrint()">打印行程</button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0 pr-3 pl-3">
+                        <div class="row border align-items-center">
+                            <div class="col-7 pt-3 pb-3">
+                                @*拼接旅客姓名*@
+                                <span class="mr-3"><b>旅客姓名：</b></span>
+                                @foreach (B_PNRPassenger passengerInfor in passengerInfors)
+                                {
+                                    //设置默认被勾选
+                                    string check = (passengerInfor.passengerNo == 1) ? "checked" : "";
+                                    //在打印的时候把后面的旅客信息隐藏起来
+                                    string noPrint = (passengerInfor.passengerNo != 1) ? "no-print" : "";
+
+                                    <div class="custom-control custom-radio custom-control-inline @noPrint" id="@("divPassenger"+passengerInfor.PNRPassengerID)">
+                                        <input type="radio" class="custom-control-input radioPassenger" @check name="passenger" id="@("passenger"+passengerInfor.PNRPassengerID)"
+                                               value="@passengerInfor.PNRPassengerID" />
+                                        <label class="custom-control-label" for="@("passenger"+passengerInfor.PNRPassengerID)">@passengerInfor.passengerName</label>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-5 text-right show-print">
+                                <b>打印时间：</b><span id="printTime">@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                            </div>
+                        </div>
+                        @*旅客行程显示*@
+                        <div class="row">
+                            <div class="col-12 p-0" id="tableContainer">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <p>
+                            电子客票旅客注意事项<br />
+                            Precautions for passengers with electronic passenger ticket
+                        </p>
+                        <p>
+                            1.您的电子客票保存在我们的电子客票系统中。<br />
+                            Your electronic passenger ticket has been saved in our electronic passenger ticket system.
+                        </p>
+                        <p>
+                            2.您使用的是中国东方航空公司提供的电子客票。请于航班起飞时间90分钟内30分钟前到机场办理登机手续。<br />
+                            what you use is electronic passenger ticket provided by China Eastern Air. Please check in at the airport 30 minutes before to within 90 minutes of departure time.
+                        </p>
+                        <p>
+                            3.您的电子客票不可签转到其他航空公司。<br />
+                            Your electronic passenger ticket can be transferred to other airline companies by signature.
+                        </p>
+                        <p>
+                            4.在办理登机手续时请您出示预定提供的有效身份证件，以办理登机手续。<br />
+                            when checking in, please show effective id certificates to be provided as scheduled in order to complete check-in smoothly.
+                        </p>
+                        <p>
+                            5.要求您的电子客票代理人提供和解释国内航空运输合同内容。<br />
+                            Ask your agent of electronic passenger ticket to provide and explain the content of domestic air transportation contract.
+                        </p>
+                        <p>
+                            6.本电子客票行程单只起行程提醒和查询之用，不作为客票的证明，不作为报销凭证。
+                            This Electronic Passenger Ticket Travel Sheet is only for travel reminding and reference, not as
+                            the proof of passenger ticket or evidence for reimbursement.
+                        </p>
+                        <p>
+                            7.东航电子客票遵循国内航空运输客规。<br />
+                            China eastern electronic Passenger ticket follows domestic air transportation regulations.
+                        </p>
+                        <p>
+                            8.如果需要T4联作为报销凭证，登机前到东航票台领取。<br />
+                            if you require t4print evidence for reimbursement please fetch them at china eastern Air ticket counter before boarding.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*行程模板*@
+    <div class="d-none">
+        <table class="table table-bordered mt-1 mb-0" id="strokeTemplate">
+            <tr>
+                <td>票号 ETNO.</td>
+                <td colspan="3" data-id="ticketNo"></td>
+            </tr>
+            <tr>
+                <td>记录编号 PNR</td>
+                <td>@pnrInfor.PNRNo</td>
+                <td>舱位 Cabin Code</td>
+                <td data-id="cabinTypeCode"></td>
+            </tr>
+            <tr>
+                <td>航班号 Flight No.</td>
+                <td data-id="flightCode"></td>
+                <td>日期 Date</td>
+                <td data-id="flightDate"></td>
+            </tr>
+            <tr>
+                <td>起飞机场 Departure Airport</td>
+                <td data-id="orangeCity"></td>
+                <td>起飞时间 Departure Time</td>
+                <td data-id="departureTime"></td>
+            </tr>
+            <tr>
+                <td>到达机场 Arrival Airport</td>
+                <td data-id="destinationCity">K</td>
+                <td>机场时间 Arrival Time</td>
+                <td data-id="arrivalTime"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/bootstrap-4.1.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/layui/layui.js"></script>
+    <script src="~/Content/js/customfunction.js"></script>
+    <script>
+        var layer;
+        $(function () {
+            layui.use(['layer'], function () {
+                layer = layui.layer;
+
+                //获取第一个旅客的旅客ID
+                var passengerId1 = @passengerInfors[0].PNRPassengerID;
+                loadPassengerETicket(passengerId1);//调用方法
+            });
+            //单选按钮的点击事件
+            $(".radioPassenger").change(function(){
+                //获取当前勾选的旅客id
+                var passengerID = $(this).val();
+                //设置当前选中的旅客姓名在打印页面显示
+                var passengers = $(".radioPassenger");
+                passengers.each(function(index,item){
+                    //判断当前勾选的ID属性是否等于当前获取的ID
+                    if($(this).prop("id")=="passenger"+passengerID){
+                        //给当前获取到的元素父级移除类
+                        $(this).parent().removeClass("no-print");
+                    }else{
+                        //给当前获取到的元素父级添加类
+                        $(this).parent().addClass("no-print");
+                    }
+                });
+                loadPassengerETicket(passengerID);
+            });
+        });
+
+        //查询旅客的行程单信息
+        function loadPassengerETicket(passengerID)
+        {            
+            //加载层
+            var layIndex = layer.load();
+            $.post("selectPassengerETicket", { passengerID: passengerID }, function (jsonData) {
+                layer.close(layIndex);
+                //获取容器
+                var tableContainer = $("#tableContainer");
+                //获取行程模板
+                var strokeTemplate = $("#strokeTemplate");
+                //清空容器
+                tableContainer.empty();
+                //判断是否存在行程
+                if (jsonData != null) {
+                    for (var i = 0; i < jsonData.length; i++)
+                    {
+                        //复制模板
+                        var strokeTable = strokeTemplate.clone();
+                        //获取行程信息
+                        var stroke = jsonData[i];
+
+                        //数据回填,find意思是找到括号里的属性
+                        strokeTable.find('[data-id="ticketNo"]').text(stroke.ticketNo);
+                        strokeTable.find('[data-id="cabinTypeCode"]').text(stroke.cabinTypeCode);
+                        strokeTable.find('[data-id="flightCode"]').text(stroke.flightCode);//航班编号
+                        //起飞日期
+                        var dtFlight = new Date(parseInt(stroke.flightDate.replace("/Date(", "").replace(")/", "")));
+                        var flightDate = dtFlight.getFullYear() + "-" + (dtFlight.getMonth()+1) + "-" + dtFlight.getDate();
+                        strokeTable.find('[data-id="flightDate"]').text(flightDate);
+
+                        strokeTable.find('[data-id="orangeCity"]').html(stroke.orangePinyin + "&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                                                        stroke.orangeCity + "&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                                                        stroke.orangeCode);//起飞城市拼音+起飞城市+起飞机场编号
+                        strokeTable.find('[data-id="departureTime"]').text(timeToStr(stroke.departureTime));//起飞时间
+                        strokeTable.find('[data-id="destinationCity"]').html(stroke.destinationPinyin + "&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                                                        stroke.destinationCity + "&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                                                        stroke.destinationCode);//到达城市拼音+到达城市+到达机场编号
+                        strokeTable.find('[data-id="arrivalTime"]').text(timeToStr(stroke.arrivalTime));//到达时间
+
+                        //行程信息放入容器
+                        tableContainer.append(strokeTable);
+                    }
+                } else {
+                    tableContainer.append("<p><b>该用户暂无行程数据，请先出票。</b></p>");
+                }
+            });
+        }
+
+        //时间戳转字符串
+        function timeToStr(time) {//09:10
+            var str = "";
+            //小时数
+            str += time.Hours < 10 ? "0" : "";
+            str += time.Hours + ":";
+            //分钟数
+            str += time.Minutes < 10 ? "0" : "";
+            str += time.Minutes;
+
+            return str;
+        }
+
+        //打印行程
+        function doPrint(){
+            window.print();
+        }
+    </script>
+</body>
+</html>

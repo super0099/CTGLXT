@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FJDPXTModelStoreContainer" CdmEntityContainer="FJDPXTEntities">
+    <EntitySetMapping Name="B_ETicket">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_ETicket">
+        <MappingFragment StoreEntitySet="B_ETicket">
+          <ScalarProperty Name="ETicketID" ColumnName="ETicketID" />
+          <ScalarProperty Name="PNRPassengerID" ColumnName="PNRPassengerID" />
+          <ScalarProperty Name="oderID" ColumnName="oderID" />
+          <ScalarProperty Name="flightID" ColumnName="flightID" />
+          <ScalarProperty Name="flightCabinID" ColumnName="flightCabinID" />
+          <ScalarProperty Name="cabinTypeID" ColumnName="cabinTypeID" />
+          <ScalarProperty Name="ticketNo" ColumnName="ticketNo" />
+          <ScalarProperty Name="tickingTime" ColumnName="tickingTime" />
+          <ScalarProperty Name="ticketPrice" ColumnName="ticketPrice" />
+          <ScalarProperty Name="payTypeID" ColumnName="payTypeID" />
+          <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+          <ScalarProperty Name="operatingTtime" ColumnName="operatingTtime" />
+          <ScalarProperty Name="eTicketStatusID" ColumnName="eTicketStatusID" />
+          <ScalarProperty Name="invoiceStatusID" ColumnName="invoiceStatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_ETicketChange">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_ETicketChange">
+        <MappingFragment StoreEntitySet="B_ETicketChange">
+          <ScalarProperty Name="ETicketChangeID" ColumnName="ETicketChangeID" />
+          <ScalarProperty Name="oldETicketID" ColumnName="oldETicketID" />
+          <ScalarProperty Name="newETicketID" ColumnName="newETicketID" />
+          <ScalarProperty Name="addPrice" ColumnName="addPrice" />
+          <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+          <ScalarProperty Name="operatingTtime" ColumnName="operatingTtime" />
+          <ScalarProperty Name="isVoluntary" ColumnName="isVoluntary" />
+          <ScalarProperty Name="changeReason" ColumnName="changeReason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_ETicketInvalid">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_ETicketInvalid">
+        <MappingFragment StoreEntitySet="B_ETicketInvalid">
+          <ScalarProperty Name="ETicketInvalidID" ColumnName="ETicketInvalidID" />
+          <ScalarProperty Name="ETicketID" ColumnName="ETicketID" />
+          <ScalarProperty Name="agencyFee" ColumnName="agencyFee" />
+          <ScalarProperty Name="actualRefunfMoney" ColumnName="actualRefunfMoney" />
+          <ScalarProperty Name="InvalidCode" ColumnName="InvalidCode" />
+          <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+          <ScalarProperty Name="invalidTime" ColumnName="invalidTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_FlightChange">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_FlightChange">
+        <MappingFragment StoreEntitySet="B_FlightChange">
+          <ScalarProperty Name="flightChangeID" ColumnName="flightChangeID" />
+          <ScalarProperty Name="ETicketID" ColumnName="ETicketID" />
+          <ScalarProperty Name="oldPNRSegmentID" ColumnName="oldPNRSegmentID" />
+          <ScalarProperty Name="newPNRSegmentID" ColumnName="newPNRSegmentID" />
+          <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+          <ScalarProperty Name="operatingTtime" ColumnName="operatingTtime" />
+          <ScalarProperty Name="changeFee" ColumnName="changeFee" />
+          <ScalarProperty Name="isVoluntary" ColumnName="isVoluntary" />
+          <ScalarProperty Name="changeReason" ColumnName="changeReason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_Order">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_Order">
+        <MappingFragment StoreEntitySet="B_Order">
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+          <ScalarProperty Name="orderNo" ColumnName="orderNo" />
+          <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="agencyFee" ColumnName="agencyFee" />
+          <ScalarProperty Name="payMoney" ColumnName="payMoney" />
+          <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
+          <ScalarProperty Name="payTime" ColumnName="payTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_PNR">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_PNR">
+        <MappingFragment StoreEntitySet="B_PNR">
+          <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+          <ScalarProperty Name="PNRNo" ColumnName="PNRNo" />
+          <ScalarProperty Name="contactName" ColumnName="contactName" />
+          <ScalarProperty Name="contactPhone" ColumnName="contactPhone" />
+          <ScalarProperty Name="TicketingInfo" ColumnName="TicketingInfo" />
+          <ScalarProperty Name="PNRStatus" ColumnName="PNRStatus" />
+          <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+          <ScalarProperty Name="createTime" ColumnName="createTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_PNROtherInfo">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_PNROtherInfo">
+        <MappingFragment StoreEntitySet="B_PNROtherInfo">
+          <ScalarProperty Name="PNROtherInfoID" ColumnName="PNROtherInfoID" />
+          <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+          <ScalarProperty Name="otherInfo" ColumnName="otherInfo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_PNRPassenger">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_PNRPassenger">
+        <MappingFragment StoreEntitySet="B_PNRPassenger">
+          <ScalarProperty Name="PNRPassengerID" ColumnName="PNRPassengerID" />
+          <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+          <ScalarProperty Name="passengerNo" ColumnName="passengerNo" />
+          <ScalarProperty Name="passengerName" ColumnName="passengerName" />
+          <ScalarProperty Name="passengerTypeID" ColumnName="passengerTypeID" />
+          <ScalarProperty Name="certificatesTypeID" ColumnName="certificatesTypeID" />
+          <ScalarProperty Name="certificatesCode" ColumnName="certificatesCode" />
+          <ScalarProperty Name="frequentPassengerID" ColumnName="frequentPassengerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_PNRSegment">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_PNRSegment">
+        <MappingFragment StoreEntitySet="B_PNRSegment">
+          <ScalarProperty Name="PNRSegmentID" ColumnName="PNRSegmentID" />
+          <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+          <ScalarProperty Name="segmentNo" ColumnName="segmentNo" />
+          <ScalarProperty Name="flightID" ColumnName="flightID" />
+          <ScalarProperty Name="cabinTypeID" ColumnName="cabinTypeID" />
+          <ScalarProperty Name="flightCabinID" ColumnName="flightCabinID" />
+          <ScalarProperty Name="bookSeatNum" ColumnName="bookSeatNum" />
+          <ScalarProperty Name="bookSeatInfo" ColumnName="bookSeatInfo" />
+          <ScalarProperty Name="segmentType" ColumnName="segmentType" />
+          <ScalarProperty Name="invalid" ColumnName="invalid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_PNRTeam">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_PNRTeam">
+        <MappingFragment StoreEntitySet="B_PNRTeam">
+          <ScalarProperty Name="PNRTeamID" ColumnName="PNRTeamID" />
+          <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+          <ScalarProperty Name="teamName" ColumnName="teamName" />
+          <ScalarProperty Name="teamNum" ColumnName="teamNum" />
+          <ScalarProperty Name="minNum" ColumnName="minNum" />
+          <ScalarProperty Name="maxNum" ColumnName="maxNum" />
+          <ScalarProperty Name="freeNum" ColumnName="freeNum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_PNRTicketing">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_PNRTicketing">
+        <MappingFragment StoreEntitySet="B_PNRTicketing">
+          <ScalarProperty Name="PNRTicketingID" ColumnName="PNRTicketingID" />
+          <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+          <ScalarProperty Name="PNRPassengerID" ColumnName="PNRPassengerID" />
+          <ScalarProperty Name="PNRSegmentID" ColumnName="PNRSegmentID" />
+          <ScalarProperty Name="ETicketID" ColumnName="ETicketID" />
+          <ScalarProperty Name="TicketingTime" ColumnName="TicketingTime" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_SpecialTeamApplication">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_SpecialTeamApplication">
+        <MappingFragment StoreEntitySet="B_SpecialTeamApplication">
+          <ScalarProperty Name="SpecialTeamApplicationID" ColumnName="SpecialTeamApplicationID" />
+          <ScalarProperty Name="PNRTeamID" ColumnName="PNRTeamID" />
+          <ScalarProperty Name="agentApplication" ColumnName="agentApplication" />
+          <ScalarProperty Name="applicationTime" ColumnName="applicationTime" />
+          <ScalarProperty Name="agentID" ColumnName="agentID" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_SpecialTeamApproval">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_SpecialTeamApproval">
+        <MappingFragment StoreEntitySet="B_SpecialTeamApproval">
+          <ScalarProperty Name="SpecialTeamApprovalID" ColumnName="SpecialTeamApprovalID" />
+          <ScalarProperty Name="SpecialTeamApplicationID" ColumnName="SpecialTeamApplicationID" />
+          <ScalarProperty Name="TourCode" ColumnName="TourCode" />
+          <ScalarProperty Name="minNum" ColumnName="minNum" />
+          <ScalarProperty Name="maxNum" ColumnName="maxNum" />
+          <ScalarProperty Name="freeNUm" ColumnName="freeNUm" />
+          <ScalarProperty Name="salesPinion" ColumnName="salesPinion" />
+          <ScalarProperty Name="businessPinion" ColumnName="businessPinion" />
+          <ScalarProperty Name="marketingPinion" ColumnName="marketingPinion" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="precautions" ColumnName="precautions" />
+          <ScalarProperty Name="approvalResult" ColumnName="approvalResult" />
+          <ScalarProperty Name="approvalUserID" ColumnName="approvalUserID" />
+          <ScalarProperty Name="approvalTime" ColumnName="approvalTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_TicketRefund">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_TicketRefund">
+        <MappingFragment StoreEntitySet="B_TicketRefund">
+          <ScalarProperty Name="ticketRefundID" ColumnName="ticketRefundID" />
+          <ScalarProperty Name="ETicketID" ColumnName="ETicketID" />
+          <ScalarProperty Name="refundMoney" ColumnName="refundMoney" />
+          <ScalarProperty Name="refundAgencyFee" ColumnName="refundAgencyFee" />
+          <ScalarProperty Name="actualRefunfMoney" ColumnName="actualRefunfMoney" />
+          <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+          <ScalarProperty Name="operatingTtime" ColumnName="operatingTtime" />
+          <ScalarProperty Name="isVoluntary" ColumnName="isVoluntary" />
+          <ScalarProperty Name="changeReason" ColumnName="changeReason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="B_TransactionRecord">
+      <EntityTypeMapping TypeName="FJDPXTModel.B_TransactionRecord">
+        <MappingFragment StoreEntitySet="B_TransactionRecord">
+          <ScalarProperty Name="transactionRecordID" ColumnName="transactionRecordID" />
+          <ScalarProperty Name="virtualAccountID" ColumnName="virtualAccountID" />
+          <ScalarProperty Name="transactionType" ColumnName="transactionType" />
+          <ScalarProperty Name="transactionMoney" ColumnName="transactionMoney" />
+          <ScalarProperty Name="transactionTime" ColumnName="transactionTime" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_Airport">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_Airport">
+        <MappingFragment StoreEntitySet="S_Airport">
+          <ScalarProperty Name="airportID" ColumnName="airportID" />
+          <ScalarProperty Name="airportCode" ColumnName="airportCode" />
+          <ScalarProperty Name="airportName" ColumnName="airportName" />
+          <ScalarProperty Name="cityName" ColumnName="cityName" />
+          <ScalarProperty Name="pinyinName" ColumnName="pinyinName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_Bulletin">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_Bulletin">
+        <MappingFragment StoreEntitySet="S_Bulletin">
+          <ScalarProperty Name="bulletinID" ColumnName="bulletinID" />
+          <ScalarProperty Name="publisherID" ColumnName="publisherID" />
+          <ScalarProperty Name="publishTime" ColumnName="publishTime" />
+          <ScalarProperty Name="bulletinContent" ColumnName="bulletinContent" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="endTime" ColumnName="endTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_CabinType">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_CabinType">
+        <MappingFragment StoreEntitySet="S_CabinType">
+          <ScalarProperty Name="cabinTypeID" ColumnName="cabinTypeID" />
+          <ScalarProperty Name="cabinTypeCode" ColumnName="cabinTypeCode" />
+          <ScalarProperty Name="cabinTypeName" ColumnName="cabinTypeName" />
+          <ScalarProperty Name="basisPrice" ColumnName="basisPrice" />
+          <ScalarProperty Name="discountRate" ColumnName="discountRate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_CertificatesType">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_CertificatesType">
+        <MappingFragment StoreEntitySet="S_CertificatesType">
+          <ScalarProperty Name="certificatesTypeID" ColumnName="certificatesTypeID" />
+          <ScalarProperty Name="certificatesType" ColumnName="certificatesType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_ETicketStatus">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_ETicketStatus">
+        <MappingFragment StoreEntitySet="S_ETicketStatus">
+          <ScalarProperty Name="eTicketStatusID" ColumnName="eTicketStatusID" />
+          <ScalarProperty Name="eTicketStatusName" ColumnName="eTicketStatusName" />
+          <ScalarProperty Name="EnglishName" ColumnName="EnglishName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_Flight">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_Flight">
+        <MappingFragment StoreEntitySet="S_Flight">
+          <ScalarProperty Name="flightID" ColumnName="flightID" />
+          <ScalarProperty Name="flightCode" ColumnName="flightCode" />
+          <ScalarProperty Name="orangeID" ColumnName="orangeID" />
+          <ScalarProperty Name="destinationID" ColumnName="destinationID" />
+          <ScalarProperty Name="flightDate" ColumnName="flightDate" />
+          <ScalarProperty Name="departureTime" ColumnName="departureTime" />
+          <ScalarProperty Name="arrivalTime" ColumnName="arrivalTime" />
+          <ScalarProperty Name="planTypeID" ColumnName="planTypeID" />
+          <ScalarProperty Name="standardPrice" ColumnName="standardPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_FlightCabin">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_FlightCabin">
+        <MappingFragment StoreEntitySet="S_FlightCabin">
+          <ScalarProperty Name="flightCabinID" ColumnName="flightCabinID" />
+          <ScalarProperty Name="flightID" ColumnName="flightID" />
+          <ScalarProperty Name="cabinTypeID" ColumnName="cabinTypeID" />
+          <ScalarProperty Name="seatNum" ColumnName="seatNum" />
+          <ScalarProperty Name="cabinPrice" ColumnName="cabinPrice" />
+          <ScalarProperty Name="sellSeatNum" ColumnName="sellSeatNum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_FrequentPassenger">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_FrequentPassenger">
+        <MappingFragment StoreEntitySet="S_FrequentPassenger">
+          <ScalarProperty Name="frequentPassengerID" ColumnName="frequentPassengerID" />
+          <ScalarProperty Name="frequentPassengerNo" ColumnName="frequentPassengerNo" />
+          <ScalarProperty Name="frequentPassengerName" ColumnName="frequentPassengerName" />
+          <ScalarProperty Name="passengerTypeID" ColumnName="passengerTypeID" />
+          <ScalarProperty Name="certificatesTypeID" ColumnName="certificatesTypeID" />
+          <ScalarProperty Name="certificatesCode" ColumnName="certificatesCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_InvoiceStatus">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_InvoiceStatus">
+        <MappingFragment StoreEntitySet="S_InvoiceStatus">
+          <ScalarProperty Name="invoiceStatusID" ColumnName="invoiceStatusID" />
+          <ScalarProperty Name="invoiceStatus" ColumnName="invoiceStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_Module">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_Module">
+        <MappingFragment StoreEntitySet="S_Module">
+          <ScalarProperty Name="moduleID" ColumnName="moduleID" />
+          <ScalarProperty Name="moduleFarID" ColumnName="moduleFarID" />
+          <ScalarProperty Name="moduleName" ColumnName="moduleName" />
+          <ScalarProperty Name="moduleDescrible" ColumnName="moduleDescrible" />
+          <ScalarProperty Name="blFun" ColumnName="blFun" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_PassengerType">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_PassengerType">
+        <MappingFragment StoreEntitySet="S_PassengerType">
+          <ScalarProperty Name="passengerTypeID" ColumnName="passengerTypeID" />
+          <ScalarProperty Name="passengerType" ColumnName="passengerType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_Permission">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_Permission">
+        <MappingFragment StoreEntitySet="S_Permission">
+          <ScalarProperty Name="permissionID" ColumnName="permissionID" />
+          <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+          <ScalarProperty Name="moduleID" ColumnName="moduleID" />
+          <ScalarProperty Name="isEnable" ColumnName="isEnable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_PlanType">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_PlanType">
+        <MappingFragment StoreEntitySet="S_PlanType">
+          <ScalarProperty Name="planTypeID" ColumnName="planTypeID" />
+          <ScalarProperty Name="planTypeName" ColumnName="planTypeName" />
+          <ScalarProperty Name="seatNum" ColumnName="seatNum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_Ticket">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_Ticket">
+        <MappingFragment StoreEntitySet="S_Ticket">
+          <ScalarProperty Name="ticketID" ColumnName="ticketID" />
+          <ScalarProperty Name="ticketDate" ColumnName="ticketDate" />
+          <ScalarProperty Name="startTicketNo" ColumnName="startTicketNo" />
+          <ScalarProperty Name="endTicketNo" ColumnName="endTicketNo" />
+          <ScalarProperty Name="currentTicketNo" ColumnName="currentTicketNo" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="isEnable" ColumnName="isEnable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_User">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_User">
+        <MappingFragment StoreEntitySet="S_User">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="userTypeID" ColumnName="userTypeID" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="userGroupID" ColumnName="userGroupID" />
+          <ScalarProperty Name="jobNumber" ColumnName="jobNumber" />
+          <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="isEnable" ColumnName="isEnable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_UserGroup">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_UserGroup">
+        <MappingFragment StoreEntitySet="S_UserGroup">
+          <ScalarProperty Name="userGroupID" ColumnName="userGroupID" />
+          <ScalarProperty Name="userGroupNumber" ColumnName="userGroupNumber" />
+          <ScalarProperty Name="superiorUserGroupID" ColumnName="superiorUserGroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_UserType">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_UserType">
+        <MappingFragment StoreEntitySet="S_UserType">
+          <ScalarProperty Name="userTypeID" ColumnName="userTypeID" />
+          <ScalarProperty Name="userType" ColumnName="userType" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="S_VirtualAccount">
+      <EntityTypeMapping TypeName="FJDPXTModel.S_VirtualAccount">
+        <MappingFragment StoreEntitySet="S_VirtualAccount">
+          <ScalarProperty Name="virtualAccountID" ColumnName="virtualAccountID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="account" ColumnName="account" />
+          <ScalarProperty Name="accountBalance" ColumnName="accountBalance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

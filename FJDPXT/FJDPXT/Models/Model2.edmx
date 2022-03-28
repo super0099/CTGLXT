@@ -1,0 +1,1272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FJDPXTModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="B_ETicket">
+          <Key>
+            <PropertyRef Name="ETicketID" />
+          </Key>
+          <Property Name="ETicketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PNRPassengerID" Type="int" />
+          <Property Name="oderID" Type="int" />
+          <Property Name="flightID" Type="int" />
+          <Property Name="flightCabinID" Type="int" />
+          <Property Name="cabinTypeID" Type="int" />
+          <Property Name="ticketNo" Type="varchar" MaxLength="16" />
+          <Property Name="tickingTime" Type="datetime" />
+          <Property Name="ticketPrice" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="payTypeID" Type="int" />
+          <Property Name="operatorID" Type="int" />
+          <Property Name="operatingTtime" Type="datetime" />
+          <Property Name="eTicketStatusID" Type="int" />
+          <Property Name="invoiceStatusID" Type="int" />
+        </EntityType>
+        <EntityType Name="B_ETicketChange">
+          <Key>
+            <PropertyRef Name="ETicketChangeID" />
+          </Key>
+          <Property Name="ETicketChangeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="oldETicketID" Type="int" />
+          <Property Name="newETicketID" Type="int" />
+          <Property Name="addPrice" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="operatorID" Type="int" />
+          <Property Name="operatingTtime" Type="datetime" />
+          <Property Name="isVoluntary" Type="bit" />
+          <Property Name="changeReason" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="B_ETicketInvalid">
+          <Key>
+            <PropertyRef Name="ETicketInvalidID" />
+          </Key>
+          <Property Name="ETicketInvalidID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ETicketID" Type="int" />
+          <Property Name="agencyFee" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="actualRefunfMoney" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="InvalidCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="operatorID" Type="int" />
+          <Property Name="invalidTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="B_FlightChange">
+          <Key>
+            <PropertyRef Name="flightChangeID" />
+          </Key>
+          <Property Name="flightChangeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ETicketID" Type="int" />
+          <Property Name="oldPNRSegmentID" Type="int" />
+          <Property Name="newPNRSegmentID" Type="int" />
+          <Property Name="operatorID" Type="int" />
+          <Property Name="operatingTtime" Type="datetime" />
+          <Property Name="changeFee" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="isVoluntary" Type="bit" />
+          <Property Name="changeReason" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="B_Order">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderNo" Type="varchar" MaxLength="20" />
+          <Property Name="PNRID" Type="int" />
+          <Property Name="totalPrice" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="agencyFee" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="payMoney" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="operatorID" Type="int" />
+          <Property Name="remark" Type="nvarchar" MaxLength="50" />
+          <Property Name="orderStatus" Type="int" />
+          <Property Name="payTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="B_PNR">
+          <Key>
+            <PropertyRef Name="PNRID" />
+          </Key>
+          <Property Name="PNRID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PNRNo" Type="nvarchar" MaxLength="6" />
+          <Property Name="contactName" Type="nvarchar" MaxLength="8" />
+          <Property Name="contactPhone" Type="nvarchar" MaxLength="11" />
+          <Property Name="TicketingInfo" Type="nvarchar" MaxLength="30" />
+          <Property Name="PNRStatus" Type="int" />
+          <Property Name="operatorID" Type="int" />
+          <Property Name="createTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="B_PNROtherInfo">
+          <Key>
+            <PropertyRef Name="PNROtherInfoID" />
+          </Key>
+          <Property Name="PNROtherInfoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PNRID" Type="int" />
+          <Property Name="otherInfo" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="B_PNRPassenger">
+          <Key>
+            <PropertyRef Name="PNRPassengerID" />
+          </Key>
+          <Property Name="PNRPassengerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PNRID" Type="int" />
+          <Property Name="passengerNo" Type="int" />
+          <Property Name="passengerName" Type="varchar" MaxLength="8" />
+          <Property Name="passengerTypeID" Type="int" />
+          <Property Name="certificatesTypeID" Type="int" />
+          <Property Name="certificatesCode" Type="nvarchar" MaxLength="18" />
+          <Property Name="frequentPassengerID" Type="int" />
+        </EntityType>
+        <EntityType Name="B_PNRSegment">
+          <Key>
+            <PropertyRef Name="PNRSegmentID" />
+          </Key>
+          <Property Name="PNRSegmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PNRID" Type="int" />
+          <Property Name="segmentNo" Type="int" />
+          <Property Name="flightID" Type="int" />
+          <Property Name="cabinTypeID" Type="int" />
+          <Property Name="flightCabinID" Type="int" />
+          <Property Name="bookSeatNum" Type="int" />
+          <Property Name="bookSeatInfo" Type="int" />
+          <Property Name="segmentType" Type="int" Nullable="false" />
+          <Property Name="invalid" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="B_PNRTeam">
+          <Key>
+            <PropertyRef Name="PNRTeamID" />
+          </Key>
+          <Property Name="PNRTeamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PNRID" Type="int" />
+          <Property Name="teamName" Type="nvarchar" MaxLength="20" />
+          <Property Name="teamNum" Type="int" />
+          <Property Name="minNum" Type="int" />
+          <Property Name="maxNum" Type="int" />
+          <Property Name="freeNum" Type="int" />
+        </EntityType>
+        <EntityType Name="B_PNRTicketing">
+          <Key>
+            <PropertyRef Name="PNRTicketingID" />
+          </Key>
+          <Property Name="PNRTicketingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PNRID" Type="int" />
+          <Property Name="PNRPassengerID" Type="int" />
+          <Property Name="PNRSegmentID" Type="int" />
+          <Property Name="ETicketID" Type="int" />
+          <Property Name="TicketingTime" Type="datetime" />
+          <Property Name="orderID" Type="int" />
+        </EntityType>
+        <EntityType Name="B_SpecialTeamApplication">
+          <Key>
+            <PropertyRef Name="SpecialTeamApplicationID" />
+          </Key>
+          <Property Name="SpecialTeamApplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PNRTeamID" Type="int" />
+          <Property Name="agentApplication" Type="nvarchar" MaxLength="100" />
+          <Property Name="applicationTime" Type="datetime" />
+          <Property Name="agentID" Type="int" />
+          <Property Name="remark" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="B_SpecialTeamApproval">
+          <Key>
+            <PropertyRef Name="SpecialTeamApprovalID" />
+          </Key>
+          <Property Name="SpecialTeamApprovalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SpecialTeamApplicationID" Type="int" />
+          <Property Name="TourCode" Type="nvarchar" MaxLength="16" />
+          <Property Name="minNum" Type="int" />
+          <Property Name="maxNum" Type="int" />
+          <Property Name="freeNUm" Type="int" />
+          <Property Name="salesPinion" Type="nvarchar" MaxLength="32" />
+          <Property Name="businessPinion" Type="nvarchar" MaxLength="32" />
+          <Property Name="marketingPinion" Type="nvarchar" MaxLength="32" />
+          <Property Name="remark" Type="nvarchar" MaxLength="100" />
+          <Property Name="precautions" Type="nvarchar" MaxLength="100" />
+          <Property Name="approvalResult" Type="bit" />
+          <Property Name="approvalUserID" Type="int" />
+          <Property Name="approvalTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="B_TicketRefund">
+          <Key>
+            <PropertyRef Name="ticketRefundID" />
+          </Key>
+          <Property Name="ticketRefundID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ETicketID" Type="int" />
+          <Property Name="refundMoney" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="refundAgencyFee" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="actualRefunfMoney" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="operatorID" Type="int" />
+          <Property Name="operatingTtime" Type="datetime" />
+          <Property Name="isVoluntary" Type="bit" />
+          <Property Name="changeReason" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="B_TransactionRecord">
+          <Key>
+            <PropertyRef Name="transactionRecordID" />
+          </Key>
+          <Property Name="transactionRecordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="virtualAccountID" Type="int" />
+          <Property Name="transactionType" Type="int" />
+          <Property Name="transactionMoney" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="transactionTime" Type="datetime" />
+          <Property Name="userID" Type="int" />
+        </EntityType>
+        <EntityType Name="S_Airport">
+          <Key>
+            <PropertyRef Name="airportID" />
+          </Key>
+          <Property Name="airportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="airportCode" Type="varchar" MaxLength="3" />
+          <Property Name="airportName" Type="nvarchar" MaxLength="10" />
+          <Property Name="cityName" Type="nvarchar" MaxLength="10" />
+          <Property Name="pinyinName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="S_Bulletin">
+          <Key>
+            <PropertyRef Name="bulletinID" />
+          </Key>
+          <Property Name="bulletinID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="publisherID" Type="int" />
+          <Property Name="publishTime" Type="datetime" />
+          <Property Name="bulletinContent" Type="nvarchar" MaxLength="100" />
+          <Property Name="startTime" Type="datetime" />
+          <Property Name="endTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="S_CabinType">
+          <Key>
+            <PropertyRef Name="cabinTypeID" />
+          </Key>
+          <Property Name="cabinTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cabinTypeCode" Type="nvarchar" MaxLength="2" />
+          <Property Name="cabinTypeName" Type="nvarchar" MaxLength="10" />
+          <Property Name="basisPrice" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="discountRate" Type="decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="S_CertificatesType">
+          <Key>
+            <PropertyRef Name="certificatesTypeID" />
+          </Key>
+          <Property Name="certificatesTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="certificatesType" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="S_ETicketStatus">
+          <Key>
+            <PropertyRef Name="eTicketStatusID" />
+          </Key>
+          <Property Name="eTicketStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="eTicketStatusName" Type="nvarchar" MaxLength="10" />
+          <Property Name="EnglishName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="S_Flight">
+          <Key>
+            <PropertyRef Name="flightID" />
+          </Key>
+          <Property Name="flightID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="flightCode" Type="nvarchar" MaxLength="8" />
+          <Property Name="orangeID" Type="int" />
+          <Property Name="destinationID" Type="int" />
+          <Property Name="flightDate" Type="date" />
+          <Property Name="departureTime" Type="time" Precision="7" />
+          <Property Name="arrivalTime" Type="time" Precision="7" />
+          <Property Name="planTypeID" Type="int" />
+          <Property Name="standardPrice" Type="decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="S_FlightCabin">
+          <Key>
+            <PropertyRef Name="flightCabinID" />
+          </Key>
+          <Property Name="flightCabinID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="flightID" Type="int" />
+          <Property Name="cabinTypeID" Type="int" />
+          <Property Name="seatNum" Type="int" />
+          <Property Name="cabinPrice" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="sellSeatNum" Type="int" />
+        </EntityType>
+        <EntityType Name="S_FrequentPassenger">
+          <Key>
+            <PropertyRef Name="frequentPassengerID" />
+          </Key>
+          <Property Name="frequentPassengerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="frequentPassengerNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="frequentPassengerName" Type="varchar" MaxLength="8" />
+          <Property Name="passengerTypeID" Type="int" />
+          <Property Name="certificatesTypeID" Type="int" />
+          <Property Name="certificatesCode" Type="nvarchar" MaxLength="18" />
+        </EntityType>
+        <EntityType Name="S_InvoiceStatus">
+          <Key>
+            <PropertyRef Name="invoiceStatusID" />
+          </Key>
+          <Property Name="invoiceStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="invoiceStatus" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="S_Module">
+          <Key>
+            <PropertyRef Name="moduleID" />
+          </Key>
+          <Property Name="moduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="moduleFarID" Type="int" />
+          <Property Name="moduleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="moduleDescrible" Type="nvarchar" MaxLength="50" />
+          <Property Name="blFun" Type="bit" />
+        </EntityType>
+        <EntityType Name="S_PassengerType">
+          <Key>
+            <PropertyRef Name="passengerTypeID" />
+          </Key>
+          <Property Name="passengerTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="passengerType" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="S_Permission">
+          <Key>
+            <PropertyRef Name="permissionID" />
+          </Key>
+          <Property Name="permissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserTypeID" Type="int" Nullable="false" />
+          <Property Name="moduleID" Type="int" Nullable="false" />
+          <Property Name="isEnable" Type="bit" />
+        </EntityType>
+        <EntityType Name="S_PlanType">
+          <Key>
+            <PropertyRef Name="planTypeID" />
+          </Key>
+          <Property Name="planTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="planTypeName" Type="nvarchar" MaxLength="10" />
+          <Property Name="seatNum" Type="int" />
+        </EntityType>
+        <EntityType Name="S_Ticket">
+          <Key>
+            <PropertyRef Name="ticketID" />
+          </Key>
+          <Property Name="ticketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ticketDate" Type="datetime" />
+          <Property Name="startTicketNo" Type="nvarchar" MaxLength="16" />
+          <Property Name="endTicketNo" Type="nvarchar" MaxLength="16" />
+          <Property Name="currentTicketNo" Type="nvarchar" MaxLength="16" />
+          <Property Name="userID" Type="int" />
+          <Property Name="isEnable" Type="bit" />
+        </EntityType>
+        <EntityType Name="S_User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userTypeID" Type="int" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="8" />
+          <Property Name="userGroupID" Type="int" Nullable="false" />
+          <Property Name="jobNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="userPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="userEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="isEnable" Type="bit" />
+          <Property Name="picture" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="S_UserGroup">
+          <Key>
+            <PropertyRef Name="userGroupID" />
+          </Key>
+          <Property Name="userGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userGroupNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="superiorUserGroupID" Type="int" />
+        </EntityType>
+        <EntityType Name="S_UserType">
+          <Key>
+            <PropertyRef Name="userTypeID" />
+          </Key>
+          <Property Name="userTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userType" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="S_VirtualAccount">
+          <Key>
+            <PropertyRef Name="virtualAccountID" />
+          </Key>
+          <Property Name="virtualAccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" />
+          <Property Name="account" Type="nvarchar" MaxLength="20" />
+          <Property Name="accountBalance" Type="decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="FJDPXTModel1StoreContainer">
+          <EntitySet Name="B_ETicket" EntityType="Self.B_ETicket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_ETicketChange" EntityType="Self.B_ETicketChange" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_ETicketInvalid" EntityType="Self.B_ETicketInvalid" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_FlightChange" EntityType="Self.B_FlightChange" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_Order" EntityType="Self.B_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_PNR" EntityType="Self.B_PNR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_PNROtherInfo" EntityType="Self.B_PNROtherInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_PNRPassenger" EntityType="Self.B_PNRPassenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_PNRSegment" EntityType="Self.B_PNRSegment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_PNRTeam" EntityType="Self.B_PNRTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_PNRTicketing" EntityType="Self.B_PNRTicketing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_SpecialTeamApplication" EntityType="Self.B_SpecialTeamApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_SpecialTeamApproval" EntityType="Self.B_SpecialTeamApproval" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_TicketRefund" EntityType="Self.B_TicketRefund" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_TransactionRecord" EntityType="Self.B_TransactionRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Airport" EntityType="Self.S_Airport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Bulletin" EntityType="Self.S_Bulletin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_CabinType" EntityType="Self.S_CabinType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_CertificatesType" EntityType="Self.S_CertificatesType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_ETicketStatus" EntityType="Self.S_ETicketStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Flight" EntityType="Self.S_Flight" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_FlightCabin" EntityType="Self.S_FlightCabin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_FrequentPassenger" EntityType="Self.S_FrequentPassenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_InvoiceStatus" EntityType="Self.S_InvoiceStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Module" EntityType="Self.S_Module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_PassengerType" EntityType="Self.S_PassengerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Permission" EntityType="Self.S_Permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_PlanType" EntityType="Self.S_PlanType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Ticket" EntityType="Self.S_Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_User" EntityType="Self.S_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_UserGroup" EntityType="Self.S_UserGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_UserType" EntityType="Self.S_UserType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_VirtualAccount" EntityType="Self.S_VirtualAccount" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FJDPXTModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="B_ETicket">
+          <Key>
+            <PropertyRef Name="ETicketID" />
+          </Key>
+          <Property Name="ETicketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PNRPassengerID" Type="Int32" />
+          <Property Name="oderID" Type="Int32" />
+          <Property Name="flightID" Type="Int32" />
+          <Property Name="flightCabinID" Type="Int32" />
+          <Property Name="cabinTypeID" Type="Int32" />
+          <Property Name="ticketNo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="tickingTime" Type="DateTime" Precision="3" />
+          <Property Name="ticketPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="payTypeID" Type="Int32" />
+          <Property Name="operatorID" Type="Int32" />
+          <Property Name="operatingTtime" Type="DateTime" Precision="3" />
+          <Property Name="eTicketStatusID" Type="Int32" />
+          <Property Name="invoiceStatusID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="B_ETicketChange">
+          <Key>
+            <PropertyRef Name="ETicketChangeID" />
+          </Key>
+          <Property Name="ETicketChangeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="oldETicketID" Type="Int32" />
+          <Property Name="newETicketID" Type="Int32" />
+          <Property Name="addPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="operatorID" Type="Int32" />
+          <Property Name="operatingTtime" Type="DateTime" Precision="3" />
+          <Property Name="isVoluntary" Type="Boolean" />
+          <Property Name="changeReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="B_ETicketInvalid">
+          <Key>
+            <PropertyRef Name="ETicketInvalidID" />
+          </Key>
+          <Property Name="ETicketInvalidID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ETicketID" Type="Int32" />
+          <Property Name="agencyFee" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="actualRefunfMoney" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="InvalidCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="operatorID" Type="Int32" />
+          <Property Name="invalidTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="B_FlightChange">
+          <Key>
+            <PropertyRef Name="flightChangeID" />
+          </Key>
+          <Property Name="flightChangeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ETicketID" Type="Int32" />
+          <Property Name="oldPNRSegmentID" Type="Int32" />
+          <Property Name="newPNRSegmentID" Type="Int32" />
+          <Property Name="operatorID" Type="Int32" />
+          <Property Name="operatingTtime" Type="DateTime" Precision="3" />
+          <Property Name="changeFee" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="isVoluntary" Type="Boolean" />
+          <Property Name="changeReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="B_Order">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orderNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PNRID" Type="Int32" />
+          <Property Name="totalPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="agencyFee" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="payMoney" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="operatorID" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="orderStatus" Type="Int32" />
+          <Property Name="payTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="B_PNR">
+          <Key>
+            <PropertyRef Name="PNRID" />
+          </Key>
+          <Property Name="PNRID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PNRNo" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="contactName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="contactPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="TicketingInfo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PNRStatus" Type="Int32" />
+          <Property Name="operatorID" Type="Int32" />
+          <Property Name="createTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="B_PNROtherInfo">
+          <Key>
+            <PropertyRef Name="PNROtherInfoID" />
+          </Key>
+          <Property Name="PNROtherInfoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PNRID" Type="Int32" />
+          <Property Name="otherInfo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="B_PNRPassenger">
+          <Key>
+            <PropertyRef Name="PNRPassengerID" />
+          </Key>
+          <Property Name="PNRPassengerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PNRID" Type="Int32" />
+          <Property Name="passengerNo" Type="Int32" />
+          <Property Name="passengerName" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="passengerTypeID" Type="Int32" />
+          <Property Name="certificatesTypeID" Type="Int32" />
+          <Property Name="certificatesCode" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="frequentPassengerID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="B_PNRSegment">
+          <Key>
+            <PropertyRef Name="PNRSegmentID" />
+          </Key>
+          <Property Name="PNRSegmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PNRID" Type="Int32" />
+          <Property Name="segmentNo" Type="Int32" />
+          <Property Name="flightID" Type="Int32" />
+          <Property Name="cabinTypeID" Type="Int32" />
+          <Property Name="flightCabinID" Type="Int32" />
+          <Property Name="bookSeatNum" Type="Int32" />
+          <Property Name="bookSeatInfo" Type="Int32" />
+          <Property Name="segmentType" Type="Int32" Nullable="false" />
+          <Property Name="invalid" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="B_PNRTeam">
+          <Key>
+            <PropertyRef Name="PNRTeamID" />
+          </Key>
+          <Property Name="PNRTeamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PNRID" Type="Int32" />
+          <Property Name="teamName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="teamNum" Type="Int32" />
+          <Property Name="minNum" Type="Int32" />
+          <Property Name="maxNum" Type="Int32" />
+          <Property Name="freeNum" Type="Int32" />
+        </EntityType>
+        <EntityType Name="B_PNRTicketing">
+          <Key>
+            <PropertyRef Name="PNRTicketingID" />
+          </Key>
+          <Property Name="PNRTicketingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PNRID" Type="Int32" />
+          <Property Name="PNRPassengerID" Type="Int32" />
+          <Property Name="PNRSegmentID" Type="Int32" />
+          <Property Name="ETicketID" Type="Int32" />
+          <Property Name="TicketingTime" Type="DateTime" Precision="3" />
+          <Property Name="orderID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="B_SpecialTeamApplication">
+          <Key>
+            <PropertyRef Name="SpecialTeamApplicationID" />
+          </Key>
+          <Property Name="SpecialTeamApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PNRTeamID" Type="Int32" />
+          <Property Name="agentApplication" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="applicationTime" Type="DateTime" Precision="3" />
+          <Property Name="agentID" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="B_SpecialTeamApproval">
+          <Key>
+            <PropertyRef Name="SpecialTeamApprovalID" />
+          </Key>
+          <Property Name="SpecialTeamApprovalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SpecialTeamApplicationID" Type="Int32" />
+          <Property Name="TourCode" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="minNum" Type="Int32" />
+          <Property Name="maxNum" Type="Int32" />
+          <Property Name="freeNUm" Type="Int32" />
+          <Property Name="salesPinion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="businessPinion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="marketingPinion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="precautions" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="approvalResult" Type="Boolean" />
+          <Property Name="approvalUserID" Type="Int32" />
+          <Property Name="approvalTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="B_TicketRefund">
+          <Key>
+            <PropertyRef Name="ticketRefundID" />
+          </Key>
+          <Property Name="ticketRefundID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ETicketID" Type="Int32" />
+          <Property Name="refundMoney" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="refundAgencyFee" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="actualRefunfMoney" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="operatorID" Type="Int32" />
+          <Property Name="operatingTtime" Type="DateTime" Precision="3" />
+          <Property Name="isVoluntary" Type="Boolean" />
+          <Property Name="changeReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="B_TransactionRecord">
+          <Key>
+            <PropertyRef Name="transactionRecordID" />
+          </Key>
+          <Property Name="transactionRecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="virtualAccountID" Type="Int32" />
+          <Property Name="transactionType" Type="Int32" />
+          <Property Name="transactionMoney" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="transactionTime" Type="DateTime" Precision="3" />
+          <Property Name="userID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="S_Airport">
+          <Key>
+            <PropertyRef Name="airportID" />
+          </Key>
+          <Property Name="airportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="airportCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="airportName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="cityName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="pinyinName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="S_Bulletin">
+          <Key>
+            <PropertyRef Name="bulletinID" />
+          </Key>
+          <Property Name="bulletinID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="publisherID" Type="Int32" />
+          <Property Name="publishTime" Type="DateTime" Precision="3" />
+          <Property Name="bulletinContent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="startTime" Type="DateTime" Precision="3" />
+          <Property Name="endTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="S_CabinType">
+          <Key>
+            <PropertyRef Name="cabinTypeID" />
+          </Key>
+          <Property Name="cabinTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cabinTypeCode" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="cabinTypeName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="basisPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="discountRate" Type="Decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="S_CertificatesType">
+          <Key>
+            <PropertyRef Name="certificatesTypeID" />
+          </Key>
+          <Property Name="certificatesTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="certificatesType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="S_ETicketStatus">
+          <Key>
+            <PropertyRef Name="eTicketStatusID" />
+          </Key>
+          <Property Name="eTicketStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eTicketStatusName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="EnglishName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="S_Flight">
+          <Key>
+            <PropertyRef Name="flightID" />
+          </Key>
+          <Property Name="flightID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="flightCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="orangeID" Type="Int32" />
+          <Property Name="destinationID" Type="Int32" />
+          <Property Name="flightDate" Type="DateTime" Precision="0" />
+          <Property Name="departureTime" Type="Time" Precision="7" />
+          <Property Name="arrivalTime" Type="Time" Precision="7" />
+          <Property Name="planTypeID" Type="Int32" />
+          <Property Name="standardPrice" Type="Decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="S_FlightCabin">
+          <Key>
+            <PropertyRef Name="flightCabinID" />
+          </Key>
+          <Property Name="flightCabinID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="flightID" Type="Int32" />
+          <Property Name="cabinTypeID" Type="Int32" />
+          <Property Name="seatNum" Type="Int32" />
+          <Property Name="cabinPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="sellSeatNum" Type="Int32" />
+        </EntityType>
+        <EntityType Name="S_FrequentPassenger">
+          <Key>
+            <PropertyRef Name="frequentPassengerID" />
+          </Key>
+          <Property Name="frequentPassengerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="frequentPassengerNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="frequentPassengerName" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="passengerTypeID" Type="Int32" />
+          <Property Name="certificatesTypeID" Type="Int32" />
+          <Property Name="certificatesCode" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="S_InvoiceStatus">
+          <Key>
+            <PropertyRef Name="invoiceStatusID" />
+          </Key>
+          <Property Name="invoiceStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="invoiceStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="S_Module">
+          <Key>
+            <PropertyRef Name="moduleID" />
+          </Key>
+          <Property Name="moduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="moduleFarID" Type="Int32" />
+          <Property Name="moduleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="moduleDescrible" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="blFun" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="S_PassengerType">
+          <Key>
+            <PropertyRef Name="passengerTypeID" />
+          </Key>
+          <Property Name="passengerTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="passengerType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="S_Permission">
+          <Key>
+            <PropertyRef Name="permissionID" />
+          </Key>
+          <Property Name="permissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserTypeID" Type="Int32" Nullable="false" />
+          <Property Name="moduleID" Type="Int32" Nullable="false" />
+          <Property Name="isEnable" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="S_PlanType">
+          <Key>
+            <PropertyRef Name="planTypeID" />
+          </Key>
+          <Property Name="planTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="planTypeName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="seatNum" Type="Int32" />
+        </EntityType>
+        <EntityType Name="S_Ticket">
+          <Key>
+            <PropertyRef Name="ticketID" />
+          </Key>
+          <Property Name="ticketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ticketDate" Type="DateTime" Precision="3" />
+          <Property Name="startTicketNo" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="endTicketNo" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="currentTicketNo" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="isEnable" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="S_User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userTypeID" Type="Int32" Nullable="false" />
+          <Property Name="userName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="userGroupID" Type="Int32" Nullable="false" />
+          <Property Name="jobNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="isEnable" Type="Boolean" />
+          <Property Name="picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="S_UserGroup">
+          <Key>
+            <PropertyRef Name="userGroupID" />
+          </Key>
+          <Property Name="userGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userGroupNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="superiorUserGroupID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="S_UserType">
+          <Key>
+            <PropertyRef Name="userTypeID" />
+          </Key>
+          <Property Name="userTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="S_VirtualAccount">
+          <Key>
+            <PropertyRef Name="virtualAccountID" />
+          </Key>
+          <Property Name="virtualAccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="account" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="accountBalance" Type="Decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="FJDPXTEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="B_ETicket" EntityType="Self.B_ETicket" />
+          <EntitySet Name="B_ETicketChange" EntityType="Self.B_ETicketChange" />
+          <EntitySet Name="B_ETicketInvalid" EntityType="Self.B_ETicketInvalid" />
+          <EntitySet Name="B_FlightChange" EntityType="Self.B_FlightChange" />
+          <EntitySet Name="B_Order" EntityType="Self.B_Order" />
+          <EntitySet Name="B_PNR" EntityType="Self.B_PNR" />
+          <EntitySet Name="B_PNROtherInfo" EntityType="Self.B_PNROtherInfo" />
+          <EntitySet Name="B_PNRPassenger" EntityType="Self.B_PNRPassenger" />
+          <EntitySet Name="B_PNRSegment" EntityType="Self.B_PNRSegment" />
+          <EntitySet Name="B_PNRTeam" EntityType="Self.B_PNRTeam" />
+          <EntitySet Name="B_PNRTicketing" EntityType="Self.B_PNRTicketing" />
+          <EntitySet Name="B_SpecialTeamApplication" EntityType="Self.B_SpecialTeamApplication" />
+          <EntitySet Name="B_SpecialTeamApproval" EntityType="Self.B_SpecialTeamApproval" />
+          <EntitySet Name="B_TicketRefund" EntityType="Self.B_TicketRefund" />
+          <EntitySet Name="B_TransactionRecord" EntityType="Self.B_TransactionRecord" />
+          <EntitySet Name="S_Airport" EntityType="Self.S_Airport" />
+          <EntitySet Name="S_Bulletin" EntityType="Self.S_Bulletin" />
+          <EntitySet Name="S_CabinType" EntityType="Self.S_CabinType" />
+          <EntitySet Name="S_CertificatesType" EntityType="Self.S_CertificatesType" />
+          <EntitySet Name="S_ETicketStatus" EntityType="Self.S_ETicketStatus" />
+          <EntitySet Name="S_Flight" EntityType="Self.S_Flight" />
+          <EntitySet Name="S_FlightCabin" EntityType="Self.S_FlightCabin" />
+          <EntitySet Name="S_FrequentPassenger" EntityType="Self.S_FrequentPassenger" />
+          <EntitySet Name="S_InvoiceStatus" EntityType="Self.S_InvoiceStatus" />
+          <EntitySet Name="S_Module" EntityType="Self.S_Module" />
+          <EntitySet Name="S_PassengerType" EntityType="Self.S_PassengerType" />
+          <EntitySet Name="S_Permission" EntityType="Self.S_Permission" />
+          <EntitySet Name="S_PlanType" EntityType="Self.S_PlanType" />
+          <EntitySet Name="S_Ticket" EntityType="Self.S_Ticket" />
+          <EntitySet Name="S_User" EntityType="Self.S_User" />
+          <EntitySet Name="S_UserGroup" EntityType="Self.S_UserGroup" />
+          <EntitySet Name="S_UserType" EntityType="Self.S_UserType" />
+          <EntitySet Name="S_VirtualAccount" EntityType="Self.S_VirtualAccount" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FJDPXTModel1StoreContainer" CdmEntityContainer="FJDPXTEntities1">
+          <EntitySetMapping Name="B_ETicket">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_ETicket">
+              <MappingFragment StoreEntitySet="B_ETicket">
+                <ScalarProperty Name="ETicketID" ColumnName="ETicketID" />
+                <ScalarProperty Name="PNRPassengerID" ColumnName="PNRPassengerID" />
+                <ScalarProperty Name="oderID" ColumnName="oderID" />
+                <ScalarProperty Name="flightID" ColumnName="flightID" />
+                <ScalarProperty Name="flightCabinID" ColumnName="flightCabinID" />
+                <ScalarProperty Name="cabinTypeID" ColumnName="cabinTypeID" />
+                <ScalarProperty Name="ticketNo" ColumnName="ticketNo" />
+                <ScalarProperty Name="tickingTime" ColumnName="tickingTime" />
+                <ScalarProperty Name="ticketPrice" ColumnName="ticketPrice" />
+                <ScalarProperty Name="payTypeID" ColumnName="payTypeID" />
+                <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+                <ScalarProperty Name="operatingTtime" ColumnName="operatingTtime" />
+                <ScalarProperty Name="eTicketStatusID" ColumnName="eTicketStatusID" />
+                <ScalarProperty Name="invoiceStatusID" ColumnName="invoiceStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_ETicketChange">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_ETicketChange">
+              <MappingFragment StoreEntitySet="B_ETicketChange">
+                <ScalarProperty Name="ETicketChangeID" ColumnName="ETicketChangeID" />
+                <ScalarProperty Name="oldETicketID" ColumnName="oldETicketID" />
+                <ScalarProperty Name="newETicketID" ColumnName="newETicketID" />
+                <ScalarProperty Name="addPrice" ColumnName="addPrice" />
+                <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+                <ScalarProperty Name="operatingTtime" ColumnName="operatingTtime" />
+                <ScalarProperty Name="isVoluntary" ColumnName="isVoluntary" />
+                <ScalarProperty Name="changeReason" ColumnName="changeReason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_ETicketInvalid">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_ETicketInvalid">
+              <MappingFragment StoreEntitySet="B_ETicketInvalid">
+                <ScalarProperty Name="ETicketInvalidID" ColumnName="ETicketInvalidID" />
+                <ScalarProperty Name="ETicketID" ColumnName="ETicketID" />
+                <ScalarProperty Name="agencyFee" ColumnName="agencyFee" />
+                <ScalarProperty Name="actualRefunfMoney" ColumnName="actualRefunfMoney" />
+                <ScalarProperty Name="InvalidCode" ColumnName="InvalidCode" />
+                <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+                <ScalarProperty Name="invalidTime" ColumnName="invalidTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_FlightChange">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_FlightChange">
+              <MappingFragment StoreEntitySet="B_FlightChange">
+                <ScalarProperty Name="flightChangeID" ColumnName="flightChangeID" />
+                <ScalarProperty Name="ETicketID" ColumnName="ETicketID" />
+                <ScalarProperty Name="oldPNRSegmentID" ColumnName="oldPNRSegmentID" />
+                <ScalarProperty Name="newPNRSegmentID" ColumnName="newPNRSegmentID" />
+                <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+                <ScalarProperty Name="operatingTtime" ColumnName="operatingTtime" />
+                <ScalarProperty Name="changeFee" ColumnName="changeFee" />
+                <ScalarProperty Name="isVoluntary" ColumnName="isVoluntary" />
+                <ScalarProperty Name="changeReason" ColumnName="changeReason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_Order">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_Order">
+              <MappingFragment StoreEntitySet="B_Order">
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="orderNo" ColumnName="orderNo" />
+                <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="agencyFee" ColumnName="agencyFee" />
+                <ScalarProperty Name="payMoney" ColumnName="payMoney" />
+                <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
+                <ScalarProperty Name="payTime" ColumnName="payTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_PNR">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_PNR">
+              <MappingFragment StoreEntitySet="B_PNR">
+                <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+                <ScalarProperty Name="PNRNo" ColumnName="PNRNo" />
+                <ScalarProperty Name="contactName" ColumnName="contactName" />
+                <ScalarProperty Name="contactPhone" ColumnName="contactPhone" />
+                <ScalarProperty Name="TicketingInfo" ColumnName="TicketingInfo" />
+                <ScalarProperty Name="PNRStatus" ColumnName="PNRStatus" />
+                <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+                <ScalarProperty Name="createTime" ColumnName="createTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_PNROtherInfo">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_PNROtherInfo">
+              <MappingFragment StoreEntitySet="B_PNROtherInfo">
+                <ScalarProperty Name="PNROtherInfoID" ColumnName="PNROtherInfoID" />
+                <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+                <ScalarProperty Name="otherInfo" ColumnName="otherInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_PNRPassenger">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_PNRPassenger">
+              <MappingFragment StoreEntitySet="B_PNRPassenger">
+                <ScalarProperty Name="PNRPassengerID" ColumnName="PNRPassengerID" />
+                <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+                <ScalarProperty Name="passengerNo" ColumnName="passengerNo" />
+                <ScalarProperty Name="passengerName" ColumnName="passengerName" />
+                <ScalarProperty Name="passengerTypeID" ColumnName="passengerTypeID" />
+                <ScalarProperty Name="certificatesTypeID" ColumnName="certificatesTypeID" />
+                <ScalarProperty Name="certificatesCode" ColumnName="certificatesCode" />
+                <ScalarProperty Name="frequentPassengerID" ColumnName="frequentPassengerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_PNRSegment">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_PNRSegment">
+              <MappingFragment StoreEntitySet="B_PNRSegment">
+                <ScalarProperty Name="PNRSegmentID" ColumnName="PNRSegmentID" />
+                <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+                <ScalarProperty Name="segmentNo" ColumnName="segmentNo" />
+                <ScalarProperty Name="flightID" ColumnName="flightID" />
+                <ScalarProperty Name="cabinTypeID" ColumnName="cabinTypeID" />
+                <ScalarProperty Name="flightCabinID" ColumnName="flightCabinID" />
+                <ScalarProperty Name="bookSeatNum" ColumnName="bookSeatNum" />
+                <ScalarProperty Name="bookSeatInfo" ColumnName="bookSeatInfo" />
+                <ScalarProperty Name="segmentType" ColumnName="segmentType" />
+                <ScalarProperty Name="invalid" ColumnName="invalid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_PNRTeam">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_PNRTeam">
+              <MappingFragment StoreEntitySet="B_PNRTeam">
+                <ScalarProperty Name="PNRTeamID" ColumnName="PNRTeamID" />
+                <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+                <ScalarProperty Name="teamName" ColumnName="teamName" />
+                <ScalarProperty Name="teamNum" ColumnName="teamNum" />
+                <ScalarProperty Name="minNum" ColumnName="minNum" />
+                <ScalarProperty Name="maxNum" ColumnName="maxNum" />
+                <ScalarProperty Name="freeNum" ColumnName="freeNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_PNRTicketing">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_PNRTicketing">
+              <MappingFragment StoreEntitySet="B_PNRTicketing">
+                <ScalarProperty Name="PNRTicketingID" ColumnName="PNRTicketingID" />
+                <ScalarProperty Name="PNRID" ColumnName="PNRID" />
+                <ScalarProperty Name="PNRPassengerID" ColumnName="PNRPassengerID" />
+                <ScalarProperty Name="PNRSegmentID" ColumnName="PNRSegmentID" />
+                <ScalarProperty Name="ETicketID" ColumnName="ETicketID" />
+                <ScalarProperty Name="TicketingTime" ColumnName="TicketingTime" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_SpecialTeamApplication">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_SpecialTeamApplication">
+              <MappingFragment StoreEntitySet="B_SpecialTeamApplication">
+                <ScalarProperty Name="SpecialTeamApplicationID" ColumnName="SpecialTeamApplicationID" />
+                <ScalarProperty Name="PNRTeamID" ColumnName="PNRTeamID" />
+                <ScalarProperty Name="agentApplication" ColumnName="agentApplication" />
+                <ScalarProperty Name="applicationTime" ColumnName="applicationTime" />
+                <ScalarProperty Name="agentID" ColumnName="agentID" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_SpecialTeamApproval">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_SpecialTeamApproval">
+              <MappingFragment StoreEntitySet="B_SpecialTeamApproval">
+                <ScalarProperty Name="SpecialTeamApprovalID" ColumnName="SpecialTeamApprovalID" />
+                <ScalarProperty Name="SpecialTeamApplicationID" ColumnName="SpecialTeamApplicationID" />
+                <ScalarProperty Name="TourCode" ColumnName="TourCode" />
+                <ScalarProperty Name="minNum" ColumnName="minNum" />
+                <ScalarProperty Name="maxNum" ColumnName="maxNum" />
+                <ScalarProperty Name="freeNUm" ColumnName="freeNUm" />
+                <ScalarProperty Name="salesPinion" ColumnName="salesPinion" />
+                <ScalarProperty Name="businessPinion" ColumnName="businessPinion" />
+                <ScalarProperty Name="marketingPinion" ColumnName="marketingPinion" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="precautions" ColumnName="precautions" />
+                <ScalarProperty Name="approvalResult" ColumnName="approvalResult" />
+                <ScalarProperty Name="approvalUserID" ColumnName="approvalUserID" />
+                <ScalarProperty Name="approvalTime" ColumnName="approvalTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_TicketRefund">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_TicketRefund">
+              <MappingFragment StoreEntitySet="B_TicketRefund">
+                <ScalarProperty Name="ticketRefundID" ColumnName="ticketRefundID" />
+                <ScalarProperty Name="ETicketID" ColumnName="ETicketID" />
+                <ScalarProperty Name="refundMoney" ColumnName="refundMoney" />
+                <ScalarProperty Name="refundAgencyFee" ColumnName="refundAgencyFee" />
+                <ScalarProperty Name="actualRefunfMoney" ColumnName="actualRefunfMoney" />
+                <ScalarProperty Name="operatorID" ColumnName="operatorID" />
+                <ScalarProperty Name="operatingTtime" ColumnName="operatingTtime" />
+                <ScalarProperty Name="isVoluntary" ColumnName="isVoluntary" />
+                <ScalarProperty Name="changeReason" ColumnName="changeReason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_TransactionRecord">
+            <EntityTypeMapping TypeName="FJDPXTModel1.B_TransactionRecord">
+              <MappingFragment StoreEntitySet="B_TransactionRecord">
+                <ScalarProperty Name="transactionRecordID" ColumnName="transactionRecordID" />
+                <ScalarProperty Name="virtualAccountID" ColumnName="virtualAccountID" />
+                <ScalarProperty Name="transactionType" ColumnName="transactionType" />
+                <ScalarProperty Name="transactionMoney" ColumnName="transactionMoney" />
+                <ScalarProperty Name="transactionTime" ColumnName="transactionTime" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Airport">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_Airport">
+              <MappingFragment StoreEntitySet="S_Airport">
+                <ScalarProperty Name="airportID" ColumnName="airportID" />
+                <ScalarProperty Name="airportCode" ColumnName="airportCode" />
+                <ScalarProperty Name="airportName" ColumnName="airportName" />
+                <ScalarProperty Name="cityName" ColumnName="cityName" />
+                <ScalarProperty Name="pinyinName" ColumnName="pinyinName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Bulletin">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_Bulletin">
+              <MappingFragment StoreEntitySet="S_Bulletin">
+                <ScalarProperty Name="bulletinID" ColumnName="bulletinID" />
+                <ScalarProperty Name="publisherID" ColumnName="publisherID" />
+                <ScalarProperty Name="publishTime" ColumnName="publishTime" />
+                <ScalarProperty Name="bulletinContent" ColumnName="bulletinContent" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_CabinType">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_CabinType">
+              <MappingFragment StoreEntitySet="S_CabinType">
+                <ScalarProperty Name="cabinTypeID" ColumnName="cabinTypeID" />
+                <ScalarProperty Name="cabinTypeCode" ColumnName="cabinTypeCode" />
+                <ScalarProperty Name="cabinTypeName" ColumnName="cabinTypeName" />
+                <ScalarProperty Name="basisPrice" ColumnName="basisPrice" />
+                <ScalarProperty Name="discountRate" ColumnName="discountRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_CertificatesType">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_CertificatesType">
+              <MappingFragment StoreEntitySet="S_CertificatesType">
+                <ScalarProperty Name="certificatesTypeID" ColumnName="certificatesTypeID" />
+                <ScalarProperty Name="certificatesType" ColumnName="certificatesType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_ETicketStatus">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_ETicketStatus">
+              <MappingFragment StoreEntitySet="S_ETicketStatus">
+                <ScalarProperty Name="eTicketStatusID" ColumnName="eTicketStatusID" />
+                <ScalarProperty Name="eTicketStatusName" ColumnName="eTicketStatusName" />
+                <ScalarProperty Name="EnglishName" ColumnName="EnglishName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Flight">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_Flight">
+              <MappingFragment StoreEntitySet="S_Flight">
+                <ScalarProperty Name="flightID" ColumnName="flightID" />
+                <ScalarProperty Name="flightCode" ColumnName="flightCode" />
+                <ScalarProperty Name="orangeID" ColumnName="orangeID" />
+                <ScalarProperty Name="destinationID" ColumnName="destinationID" />
+                <ScalarProperty Name="flightDate" ColumnName="flightDate" />
+                <ScalarProperty Name="departureTime" ColumnName="departureTime" />
+                <ScalarProperty Name="arrivalTime" ColumnName="arrivalTime" />
+                <ScalarProperty Name="planTypeID" ColumnName="planTypeID" />
+                <ScalarProperty Name="standardPrice" ColumnName="standardPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_FlightCabin">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_FlightCabin">
+              <MappingFragment StoreEntitySet="S_FlightCabin">
+                <ScalarProperty Name="flightCabinID" ColumnName="flightCabinID" />
+                <ScalarProperty Name="flightID" ColumnName="flightID" />
+                <ScalarProperty Name="cabinTypeID" ColumnName="cabinTypeID" />
+                <ScalarProperty Name="seatNum" ColumnName="seatNum" />
+                <ScalarProperty Name="cabinPrice" ColumnName="cabinPrice" />
+                <ScalarProperty Name="sellSeatNum" ColumnName="sellSeatNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_FrequentPassenger">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_FrequentPassenger">
+              <MappingFragment StoreEntitySet="S_FrequentPassenger">
+                <ScalarProperty Name="frequentPassengerID" ColumnName="frequentPassengerID" />
+                <ScalarProperty Name="frequentPassengerNo" ColumnName="frequentPassengerNo" />
+                <ScalarProperty Name="frequentPassengerName" ColumnName="frequentPassengerName" />
+                <ScalarProperty Name="passengerTypeID" ColumnName="passengerTypeID" />
+                <ScalarProperty Name="certificatesTypeID" ColumnName="certificatesTypeID" />
+                <ScalarProperty Name="certificatesCode" ColumnName="certificatesCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_InvoiceStatus">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_InvoiceStatus">
+              <MappingFragment StoreEntitySet="S_InvoiceStatus">
+                <ScalarProperty Name="invoiceStatusID" ColumnName="invoiceStatusID" />
+                <ScalarProperty Name="invoiceStatus" ColumnName="invoiceStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Module">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_Module">
+              <MappingFragment StoreEntitySet="S_Module">
+                <ScalarProperty Name="moduleID" ColumnName="moduleID" />
+                <ScalarProperty Name="moduleFarID" ColumnName="moduleFarID" />
+                <ScalarProperty Name="moduleName" ColumnName="moduleName" />
+                <ScalarProperty Name="moduleDescrible" ColumnName="moduleDescrible" />
+                <ScalarProperty Name="blFun" ColumnName="blFun" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_PassengerType">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_PassengerType">
+              <MappingFragment StoreEntitySet="S_PassengerType">
+                <ScalarProperty Name="passengerTypeID" ColumnName="passengerTypeID" />
+                <ScalarProperty Name="passengerType" ColumnName="passengerType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Permission">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_Permission">
+              <MappingFragment StoreEntitySet="S_Permission">
+                <ScalarProperty Name="permissionID" ColumnName="permissionID" />
+                <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+                <ScalarProperty Name="moduleID" ColumnName="moduleID" />
+                <ScalarProperty Name="isEnable" ColumnName="isEnable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_PlanType">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_PlanType">
+              <MappingFragment StoreEntitySet="S_PlanType">
+                <ScalarProperty Name="planTypeID" ColumnName="planTypeID" />
+                <ScalarProperty Name="planTypeName" ColumnName="planTypeName" />
+                <ScalarProperty Name="seatNum" ColumnName="seatNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Ticket">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_Ticket">
+              <MappingFragment StoreEntitySet="S_Ticket">
+                <ScalarProperty Name="ticketID" ColumnName="ticketID" />
+                <ScalarProperty Name="ticketDate" ColumnName="ticketDate" />
+                <ScalarProperty Name="startTicketNo" ColumnName="startTicketNo" />
+                <ScalarProperty Name="endTicketNo" ColumnName="endTicketNo" />
+                <ScalarProperty Name="currentTicketNo" ColumnName="currentTicketNo" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="isEnable" ColumnName="isEnable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_User">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_User">
+              <MappingFragment StoreEntitySet="S_User">
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="userTypeID" ColumnName="userTypeID" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userGroupID" ColumnName="userGroupID" />
+                <ScalarProperty Name="jobNumber" ColumnName="jobNumber" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="isEnable" ColumnName="isEnable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_UserGroup">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_UserGroup">
+              <MappingFragment StoreEntitySet="S_UserGroup">
+                <ScalarProperty Name="userGroupID" ColumnName="userGroupID" />
+                <ScalarProperty Name="userGroupNumber" ColumnName="userGroupNumber" />
+                <ScalarProperty Name="superiorUserGroupID" ColumnName="superiorUserGroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_UserType">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_UserType">
+              <MappingFragment StoreEntitySet="S_UserType">
+                <ScalarProperty Name="userTypeID" ColumnName="userTypeID" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_VirtualAccount">
+            <EntityTypeMapping TypeName="FJDPXTModel1.S_VirtualAccount">
+              <MappingFragment StoreEntitySet="S_VirtualAccount">
+                <ScalarProperty Name="virtualAccountID" ColumnName="virtualAccountID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="account" ColumnName="account" />
+                <ScalarProperty Name="accountBalance" ColumnName="accountBalance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

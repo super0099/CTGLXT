@@ -1,0 +1,25 @@
+﻿body {
+    border-radius:5px;
+    background-color:#fff;
+    box-shadow:0px 2px 2px #e3e4e8;
+    /*border-bottom: 6px solid #e3e4e8;
+    border-right: 6px solid #e3e4e8;*/
+}
+.content {
+    margin-left:15%;
+    margin-right:15%;
+    border-top:2px solid #ced4da;
+}
+/*角色维护页面*/
+.card-header {
+    text-align:center;
+    font-weight:700;
+    color:#666;
+    padding: 0.55rem 1.25rem;
+}
+/*表格修改中的删除图标样式*/
+.fontweight {
+    font-weight:bolder;
+    color:red;
+    font-size:1rem;
+}

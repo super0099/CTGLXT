@@ -1,0 +1,719 @@
+﻿@using FJDPXT.Models
+
+@{
+    Layout = null;
+
+    List<S_Airport> airports = ViewBag.airports;
+    List<S_CabinType> cabinTypes = ViewBag.cabinTypes;
+    List<S_PlanType> planTypes = ViewBag.planTypes;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>飞机订票系统</title>
+    <link href="~/Content/images/log.png" type="image/x-icon" rel="shortcut icon" />
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <!--bootstrap 框架样式表-->
+    <link href="~/Content/bootstrap-4.1.3-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!--后台模板中的字体图标css样式-->
+    <link href="~/Content/app-assets/fonts/feather/style.min.css" rel="stylesheet" />
+    <link href="~/Content/app-assets/fonts/simple-line-icons/style.min.css" rel="stylesheet" />
+
+    <style>
+        .layui-laydate-content > .layui-laydate-list {
+            padding-bottom: 0px;
+            overflow: hidden;
+        }
+
+            .layui-laydate-content > .layui-laydate-list > li {
+                width: 50%;
+            }
+
+        .merge-box .scrollbox .merge-list {
+            padding-bottom: 5px;
+        }
+
+        .laydate-time-list ol li {
+            padding-left: 55px !important;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div class="container-fluid">
+        <h3 class="text-center py-3">航 班 维 护</h3>
+        <div class="pb-3">
+            <div class="row">
+                <form class="form-inline col layui-form">
+                    <div class="form-group mb-2">
+                        <label class="col-form-label mr-1" for="airportStart">起飞城市:</label>
+                        <select name="airportStart" lay-verify="" lay-search class="form-control mr-2" id="airportStart" lay-filter="airportStart" style="display: none;">
+                            <option value="0" data-code="">-- 选择 --</option>
+                            @foreach (S_Airport airport in airports)
+                            {
+                                <option value="@airport.airportID">@airport.cityName [@airport.airportName]</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group mb-2 ml-3">
+                        <label class="col-form-label mr-1" for="airportEnd">目的城市<sup class="text-danger">&nbsp;</sup>:</label>
+                        <select name="airportEnd" lay-verify="" lay-search class="form-control mr-2" id="airportEnd" lay-filter="airportEnd" style="display: none;">
+                            <option value="0" data-code="">-- 选择 --</option>
+                            @foreach (S_Airport airport in airports)
+                            {
+                                <option value="@airport.airportID">@airport.cityName [@airport.airportName]</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group mb-2 ml-3">
+                        <label class="col-form-label mr-1" for="flightDateLimit">起飞日期:</label>
+                        <input type="text" class="form-control mr-2" id="flightDateLimit" placeholder="请选择要筛选航班起日期段">
+                    </div>
+                    <button type="button" class="btn btn-primary mb-2" id="btnSearch">查询</button>
+                    <button type="button" class="btn btn-primary mb-2 ml-2" id="btnAddFlight">添加航班</button>
+                    @*方便测试*@
+                    <button type="button" class="btn btn-outline-primary mb-2 ml-2" onclick="openCreateFlightAuto()">自动生成航班</button>
+                </form>
+            </div>
+            @*航班信息表*@
+            <table id="tabFlight" lay-filter="tabFlight"></table>
+
+            <p class="text-muted"><b>航班舱位信息</b></p>
+
+            @*航班舱位信息表*@
+            <table id="tabFlightCabin" lay-filter="tabFlightCabin"></table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalFlight">
+        <div class="modal-dialog" style="max-width: none !important; width: 1100px !important;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mTitle">添加航班</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmFlight" class="layui-form">
+                        <input type="hidden" id="formInsertOrUpdate" />@*新增与修改的标识*@
+                        <input type="reset" hidden />
+                        <input type="text" name="flightID" hidden />
+                        <div class="form-row">
+                            <label for="formFlightCode" class="col-form-label text-right col-1">航班号:</label>
+                            <div class="col-5">
+                                <input type="text" class="form-control" name="flightCode" id="formFlightCode" onkeyup='value = value.replace(/[^A-Z0-9]/g, "")'>
+                            </div>
+                            <label for="formFlightDate" class="col-form-label text-right col-1">航班日期: </label>
+                            <div class="col-5">
+                                <input type="text" class="form-control" name="flightDate" id="formFlightDate">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label for="formAirportOrange" class="col-form-label text-right col-1 mt-2">起飞机场:</label>
+                            <div class="col-5 mt-2">
+                                <select name="orangeID" lay-verify="" lay-search class="form-control mr-2" id="formAirportOrange" lay-filter="formAirportOrange">
+                                    <option value="0" data-code="">-- 选择 --</option>
+                                    @foreach (S_Airport airport in airports)
+                                    {
+                                        <option value="@airport.airportID">@airport.cityName [@airport.airportName]</option>
+                                    }
+                                </select>
+                            </div>
+                            <label for="formAirportDestination" class="col-form-label text-right col-1 mt-2">到达机场: </label>
+                            <div class="col-5 mt-2">
+                                <select name="destinationID" lay-verify="" lay-search class="form-control mr-2" id="formAirportDestination" lay-filter="formAirportDestination">
+                                    <option value="0" data-code="">-- 选择 --</option>
+                                    @foreach (S_Airport airport in airports)
+                                    {
+                                        <option value="@airport.airportID">@airport.cityName [@airport.airportName]</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="formDepartureTime" class="col-form-label text-right col-1 mt-2">起飞时间:</label>
+                            <div class="col-5 mt-2">
+                                <input type="text" class="form-control" name="departureTime" id="formDepartureTime">
+                            </div>
+                            <label for="formArrivalTime" class="col-form-label text-right col-1 mt-2">到达时间: </label>
+                            <div class="col-5 mt-2">
+                                <input type="text" class="form-control" name="arrivalTime" id="formArrivalTime">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="formPlanType" class="col-form-label text-right col-1 mt-2">飞机机型:</label>
+                            <div class="col-5 mt-2">
+                                <select name="planTypeID" lay-verify="" lay-search class="form-control mr-2" id="formPlanType" lay-filter="">
+                                    <option value="0" data-code="">-- 选择 --</option>
+                                    @foreach (S_PlanType planType in planTypes)
+                                    {
+                                        <option value="@planType.planTypeID" data-seat-num="@planType.seatNum">@planType.planTypeName 座位数:@planType.seatNum</option>
+                                    }
+                                </select>
+                            </div>
+                            <label for="formStandardPrice" class="col-form-label text-right col-1 mt-2">标准价格: </label>
+                            <div class="col-5 mt-2">
+                                <input type="number" class="form-control" name="standardPrice" id="formStandardPrice" min="0" value="0">
+                            </div>
+                        </div>
+                        @*航班舱位信息*@
+                        <table class="table table-bordered text-center mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">序号</th>
+                                    <th scope="col">舱位等级-参考折扣</th>
+                                    <th scope="col">座位数</th>
+                                    <th scope="col" class="tdSellSeatNum">售出座位数</th>
+                                    <th scope="col" colspan="2">价格</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < cabinTypes.Count; i++)
+                                {
+                                    S_CabinType cabinType = cabinTypes[i];
+
+                                    <tr class="trFlightCabin">
+                                        @* 序号 隐藏 舱位等级id *@
+                                        <td>@(i + 1) <input type="hidden" name="cabinTypeID" id="formCabinTypeID_@i" value="@cabinType.cabinTypeID" data-cabin-name="@cabinType.cabinTypeName (@cabinType.cabinTypeCode)" /></td>
+                                        @*舱位等级名称 编号 折扣*@
+                                        <td>@cabinType.cabinTypeName (@cabinType.cabinTypeCode) - @((int)(cabinType.discountRate * 100))%</td>
+                                        @*舱位座位数*@
+                                        <td class="p-1"><input type="number" class="form-control m-0 inputSeatNum" min="0" value="0" name="seatNum" id="formSeatNum_@i" /></td>
+                                        @*售出座位数*@
+                                        <td class="tdSellSeatNum">0</td>
+                                        @*舱位价格*@
+                                        <td class="p-1">
+                                            <input type="number" class="form-control m-0" min="0" value="0" name="cabinPrice" id="formCabinPrice_@i" data-discount-rate="@cabinType.discountRate" />
+                                        </td>
+                                        <td class="p-1">
+                                            <button type="button" class="btn btn-sm btn-outline-primary btnCabinPrice"><i class="icon-refresh"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <p>已经分配座位数：<span id="setSeatNum">0</span></p>
+
+                        <div class="form-group text-center">
+                            <button type="button" class="btn btn-outline-primary mr-2" onclick="saveFlight()">确定</button>
+                            <button type="button" class="btn btn-outline-secondary ml-2" data-dismiss="modal">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
+    <script src="~/Content/layui/layui.js"></script>
+    <script src="~/Content/js/customfunction.js"></script>
+    <script>
+        var tabFlight, tabFlightCabin, layerIndex = 0;
+        var layer, layuiTable, layuiForm, laydate;//保存layui模块以便全局使用
+        $(document).ready(function () {
+            //加载和初始化layui模块
+            layui.use(['layer', 'table', 'form', 'laydate'],
+                function() { //layui.use()加载所需模块
+                    layer = layui.layer;
+                    layuiTable = layui.table;
+                    layuiForm = layui.form;//layui.form加载时，就会自动初始化HTML中的.layui-form表单元素
+                    laydate = layui.laydate;
+
+                    laydate.render({
+                        elem: "#flightDateLimit",
+                        type: "date",
+                        btns: ['clear', 'confirm'],//工具按钮，可用值有：clear、now、confirm
+                        range: true,//日期范围选择
+                        trigger: 'click'//解决Laydate绑定input元素一闪而过的问题
+                    });
+
+                    //表格渲染layuiTable.render({})
+                    tabFlight = layuiTable.render({
+                        elem: "#tabFlight", //table的ID HTML元素的ID
+                        url: "@Url.Content("~/OthersMaintenance/FlightMaintain/SelectFlight")", //数据接口 方法的路径
+                        cols: [
+                            [
+                                { title: '序号', type: 'numbers' }, //序号列，
+                                { title: 'flightID', field: 'flightID', hide: true },
+                                { title: '航班号', field: 'flightCode', align: 'center',width:120 },
+                                { title: '起飞机场 - 降落机场', templet: customOrangeAirport, align: 'center', minWidth: 400 },
+                                { title: "航班日期", templet: customDate, align: "center" },
+                                { title: '起飞-到达时间', templet: customTime, align: 'center' },
+                                { title: '机型', field: 'planTypeName', align: 'center' },
+                                { title: '标准价格', field: 'standardPrice', align: 'center' },
+                                { title: '操作', templet: customOperate, width: 160, align: 'center' }
+                            ]
+                        ],
+                        page: {
+                            limit: 5, //指定每页显示的条数
+                            limits: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50], //每页条数的选择项
+                        } //开启分页
+                    });
+
+                    tabFlightCabin=layuiTable.render({
+                        elem: "#tabFlightCabin", //table的ID HTML元素的ID
+                        //url: "", //未选中航班前，航班舱位信息为空数据，不指定url.指定Data为空数组
+                        data: [],
+                        totalRow: true,
+                        totalRowText:"合计:",
+                        cols: [
+                            [
+                                { title: 'flightCabinID', field: 'flightCabinID', hide: true },
+                                { title: '序号', type: 'numbers' }, //序号列，
+                                { title: '舱位类型', field: 'cabinTypeName', align: 'center' },
+                                { title: '舱位类型编号', field: 'cabinTypeCode', align: 'center' },
+                                { title: '舱位座位数', field: 'seatNum', align: 'center', totalRow: true },
+                                { title: '售出座位数', field: 'sellSeatNum', align: 'center', totalRow: true },
+                                { title: '舱位价格', field: 'cabinPrice', align: 'center' }
+                            ]
+                        ],
+                        //page: {
+                        //    limit: 10, //指定每页显示的条数
+                        //    limits: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50] //每页条数的选择项
+                        //} ,//开启分页
+                        done: function () {
+                            fnSetNoDouble();//这里调用删除小数点
+                        }
+                    });
+
+
+                    //监听行单击事件
+                    layuiTable.on('row(tabFlight)', function (obj) {
+                        //console.log(obj.tr); //得到当前行元素对象
+                        //console.log(obj.data); //得到当前行数据
+                        //obj.del(); //删除当前行
+                        //obj.update(fields); //修改当前行数据
+                        //标注选中样式
+                        obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+                        var flightID = obj.data.flightID;//获取点击行的航班I
+                        //重新加载表格tabFlightCabin
+                        tabFlightCabin.reload({
+                            url:"@Url.Content("~/OthersMaintenance/FlightMaintain/SelectFlightCabinByFlightID")",
+                            where: {
+                                flightID: flightID//传入航班ID
+                            }
+                        });
+
+                    });
+
+
+
+
+                    //============初始化Modal中的表单Layui控件 --
+                    //航班日期
+                    laydate.render({
+                        elem: "#formFlightDate",
+                        type: "date",
+                        btns: ['now', 'confirm'],//工具按钮，可用值有：clear、now、confirm
+                        trigger: 'click'//解决Laydate绑定input元素一闪而过的问题
+                    });
+                    //航班起飞时间
+                    laydate.render({
+                        elem: "#formDepartureTime",
+                        type: "time",
+                        btns: ['now', 'confirm'],//工具按钮，可用值有：clear、now、confirm
+                        trigger: 'click',//解决Laydate绑定input元素一闪而过的问题
+                        format: 'HH:mm' //格式化时间，不显示秒
+                    });
+
+                    laydate.render({
+                        elem: "#formArrivalTime",
+                        type: "time",
+                        btns: ['now', 'confirm'], //工具按钮，可用值有：clear、now、confirm
+                        trigger: 'click', //解决Laydate绑定input元素一闪而过的问题
+                        format: 'HH:mm' //格式化时间，不显示秒
+                });
+
+                });
+
+            //查询按钮点击事件
+            $("#btnSearch").click(function () {
+                //获取查询条件
+                var orangeAirportID = $("#airportStart").val();//起飞机场ID
+                var destinationAirportID = $("#airportEnd").val();//降落机场ID
+                var flightDateLimit = $("#flightDateLimit").val();//起飞时间段限制
+
+                //对获取到的数据进行处理
+                if (orangeAirportID == "") {
+                    orangeAirportID = 0;
+                }
+
+                if (destinationAirportID == "") {
+                    destinationAirportID = 0;
+                }
+
+                //tabFlight表格重载
+                tabFlight.reload({
+                    where: {
+                        orangeAirportID: orangeAirportID,
+                        destinationAirportID: destinationAirportID,
+                        flightDateLimit: flightDateLimit
+                    },
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                });
+                //tabFlightCabin
+                tabFlightCabin.reload({
+                    url:"@Url.Content("~/OthersMaintenance/FlightMaintain/SelectFlightCabinByFlightID")",
+                    where: {
+                        flightID: 0//传入航班ID
+                    },
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                });
+            });
+
+
+
+
+            //打开新增模态框
+            $("#btnAddFlight").click(function () {
+                $('#frmFlight [type="reset"]').click();//重置表单
+                $("#formInsertOrUpdate").val("insert");//设置为新增
+                $(".tdSellSeatNum").hide();//隐藏售出座位数列
+                $("#mTitle").text("添加航班");//模态框标题
+                $("#setSeatNum").text("0");//已经分配座位数设置为0
+                $('#modalFlight').modal('show');//打开Modal
+            });
+
+
+            $(".inputSeatNum").change(function() {
+                var totalSetSeatNum = 0;
+                //遍历所有舱位设置的座位数 求和
+                $(".inputSeatNum").each(function(index, item) {
+                    var itemValue = $(item).val();
+                    if (itemValue!="") {
+                        totalSetSeatNum += parseInt(itemValue);
+                    }
+                });
+                $("#setSeatNum").text(totalSetSeatNum);
+            });
+        });
+
+        //layuiTable 自定义列==============================
+        //起飞机场-到达机场
+        function customOrangeAirport(data) {
+            var orangeCityName = data.orangeCityName;//起飞城市
+            var orangeAirportName = data.orangeAirportName;//起飞机场名称
+            var str= orangeCityName + " [" + orangeAirportName + "] -->  ";
+
+            var destinationCityName = data.destinationCityName;//降落城市
+            var destinationAirportName = data.destinationAirportName;//降落机场名称
+            str += destinationCityName + " [" + destinationAirportName + "]";
+            return str;
+        }
+        //航班日期
+        function customDate(rowData) {
+            if (rowData.flightDate != undefined && rowData.flightDate != null && rowData.flightDate != "") {
+                var date = new Date(parseInt(rowData.flightDate.replace("/Date(", "").replace(")/", ""), 10));
+                //月份为0-11，所以+1，月份小于10时补个0
+                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                return date.getFullYear() + "-" + month + "-" + currentDate;
+            }
+            return "";
+        }
+
+        //航班起飞降-降落时间
+        function customTime(data) {
+            return flightTimeToStr(data.departureTime, data.arrivalTime);
+        }
+        //操作按钮列
+        function customOperate(data) {
+            var flightID = data.flightID;//航班id
+            var btns = "";
+            //修改按钮
+            btns += '<button type="button" class="layui-btn layui-btn-xs" onclick=openUpdateFlight(' + flightID + ',true)>修改</button>';
+            //删除按钮
+            btns += '<button type="button" class="layui-btn layui-btn-xs layui-btn-danger" onclick=deleteFlight(' + flightID + ')>删除</button>';
+            return btns;
+        }
+
+
+        //
+        function fnSetNoDouble() {
+            setTimeout(function () {
+                fnGetTotalDiv(4);//删除数据所在列
+                fnGetTotalDiv(5);//删除数据所在列
+            }, 10);
+        };
+        //删除合计行的小数点
+        function fnGetTotalDiv(index) {
+            var div = '.layui-table-total div:eq(' + index + ')';
+            var strHtml = $(div).html();
+            if (strHtml!=undefined && strHtml != "") {
+                // 进行剪切
+                strHtml = strHtml.substr(0, strHtml.indexOf("."));
+                $(div).html(strHtml);
+            }
+        };
+
+
+        //点击设置参考航班舱位价格按钮 计算对应航班舱位的参考价格
+        $(".btnCabinPrice").click(function () {
+            var standardPrice = $("#formStandardPrice").val();//获取航班标准价格
+            //获取计算默认按钮对应的 舱位价格 input元素
+            var elCabinPrice = $(this).parent().parent().find('input[name="cabinPrice"]')[0];
+            //获取舱位等级对应的折扣
+            var discountRate = parseFloat($(elCabinPrice).data("discount-rate"));
+            //计算舱位价格=航班标准价格*舱位等级折扣 然后取整
+            var cabinPrice = parseInt(standardPrice * discountRate);
+            //将计算得到的参考舱位价格设置回input
+            $(elCabinPrice).val(cabinPrice);
+        });
+
+        //打开修改航班Modal
+        function openUpdateFlight(flightID) {
+            //请求服务端获取被修改航班信息
+            $.post("@Url.Content("~/OthersMaintenance/FlightMaintain/SelectFlightInfoByID")",
+                {
+                    flightID: flightID
+                },
+                function(jsonData) {
+                    if (jsonData != null) {
+                        $('#frmFlight [type="reset"]').click();//重置表单
+                        $("#formInsertOrUpdate").val("update");//设置为新增
+                        $("#mTitle").text("修改航班");//模态框标题
+                        $(".tdSellSeatNum").show();//显示售出座位数列
+
+                        //==回填数据
+                        var flight = jsonData.flight;//航班信息
+                        var flightCabins = jsonData.flightCabins;//航班舱位信息
+
+                        //航班信息回填
+                        $('#frmFlight [name="flightID"]').val(flight.flightID);//航班ID
+                        $('#frmFlight [name="flightCode"]').val(flight.flightCode);//航班编号
+                        $('#frmFlight [name="orangeID"]').val(flight.orangeID);//起飞机场ID
+                        $('#frmFlight [name="destinationID"]').val(flight.destinationID);//到达机场ID
+                        //航班日期
+                        var strDate = flight.flightDate;// /Date(1576252800000)/
+                        var flightDate = new Date(parseInt(strDate.substr(6, 13)));//1576252800000 --> Date
+                        var strFlightDate = flightDate.getFullYear() + '-'
+                            + ((flightDate.getMonth() + 1) < 10 ? "0" : "") + (flightDate.getMonth() + 1) + '-'
+                            + (flightDate.getDate() < 10 ? "0" : "") + flightDate.getDate();
+                        $('#frmFlight [name="flightDate"]').val(strFlightDate);//航班日期
+                        $('#frmFlight [name="departureTime"]').val(flightTimeToStr(flight.departureTime));//起飞时间
+                        $('#frmFlight [name="arrivalTime"]').val(flightTimeToStr(flight.arrivalTime));//到达时间
+                        $('#frmFlight [name="planTypeID"]').val(flight.planTypeID);//飞机机型
+                        $('#frmFlight [name="standardPrice"]').val(flight.standardPrice);//标准价格
+                        layuiForm.render('select'); //刷新select选择框渲染
+
+                        //航班舱位信息回填
+                        var totalSetSeatNum = 0;//设置座位数的总和
+                        //遍历tbody里面的tr，获取航班舱位信息
+                        $(".trFlightCabin").each(function (index, item) {
+                            //获取tr绑定的航班舱位
+                            var cabinTypeID = $(item).find('[name="cabinTypeID"]').val();
+                            //遍历匹配数据库返回的数据
+                            for (var i = 0; i < flightCabins.length; i++) {
+                                //判断数据库返回的数据如果 舱位类型ID可以匹配上就回填数据
+                                if (flightCabins[i].cabinTypeID == cabinTypeID) {
+                                    //座位数
+                                    $(item).find('[name="seatNum"]').val(flightCabins[i].seatNum);
+                                    //舱位价格
+                                    $(item).find('[name="cabinPrice"]').val(flightCabins[i].cabinPrice);
+                                    //售出座位数
+                                    $(item).find('.tdSellSeatNum').text(flightCabins[i].sellSeatNum);
+
+                                    totalSetSeatNum += flightCabins[i].seatNum;//求座位数的总和
+                                }
+                            }
+                        });
+                        //显示已经设置的座位数总和
+                        $("#setSeatNum").text(totalSetSeatNum);
+
+
+                        $('#modalFlight').modal('show');//打开Modal
+                    }
+                }
+            );
+
+
+        }
+
+        function saveFlight() {
+            //=====获取参数
+            var flightCode = $('#frmFlight [name="flightCode"]').val();//航班编号
+            if (flightCode == undefined || flightCode == "") {
+                myAlert("请填写航班号", "提示");
+                return;
+            }
+            var flightDate = $('#frmFlight [name="flightDate"]').val();//航班日期
+            if (flightDate == undefined || flightDate == "") {
+                myAlert("请选择航班日期", "提示");
+                return;
+            }
+            var orangeID = $('#frmFlight [name="orangeID"]').val();//航班起飞机场ID
+            if (orangeID == undefined || orangeID == "") {
+                myAlert("请选择航班起飞机场", "提示");
+                return;
+            }
+            var destinationID = $('#frmFlight [name="destinationID"]').val();//航班目的机场ID
+            if (destinationID == undefined || destinationID == "") {
+                myAlert("请选择航班目的机场", "提示");
+                return;
+            }
+            var departureTime = $('#frmFlight [name="departureTime"]').val();//航班起飞时间
+            if (departureTime == undefined || departureTime == "") {
+                myAlert("请选择航班起飞时间", "提示");
+                return;
+            }
+            var arrivalTime = $('#frmFlight [name="arrivalTime"]').val();//航班到达时间
+            if (arrivalTime == undefined || arrivalTime == "") {
+                myAlert("请选择航班到达时间", "提示");
+                return;
+            }
+            var planTypeID = $('#frmFlight [name="planTypeID"]').val();//飞机机型ID
+            if (planTypeID == undefined || planTypeID == "") {
+                myAlert("请选择航班飞机机型", "提示");
+                return;
+            }
+            var standardPrice = $('#frmFlight [name="standardPrice"]').val();//标准价格
+            if (standardPrice == undefined || standardPrice == "") {
+                myAlert("请填写航班标准价格", "提示");
+                return;
+            }
+
+            //获取航班舱位信息
+            var cabinTypeIDs = [];//存放舱位等级ID
+            var seatNums = [];//存放设置的座位数
+            var cabinPrices = [];//存放设置的舱位价格
+
+            //遍历tbody里面的tr，获取航班舱位信息
+            $(".trFlightCabin").each(function (index, item) {
+                var cabinName = $(item).find('[name="cabinTypeID"]').data("cabin-name");
+
+                var cabinTypeID = $(item).find('[name="cabinTypeID"]').val();
+                cabinTypeIDs.push(cabinTypeID);
+                var seatNum = $(item).find('[name="seatNum"]').val();
+                if (seatNum != undefined && seatNum != "") {
+                    seatNums.push(seatNum);
+                } else {
+                    myAlert("请填写 【" + cabinName + "】 座位数，如果不设置该舱位，请填写0", "提示");
+                    return;
+                }
+                var cabinPrice = $(item).find('[name="cabinPrice"]').val();
+                if (cabinPrice != undefined && cabinPrice != "") {
+                    cabinPrices.push(cabinPrice);
+                } else {
+                    myAlert("请填写 【" + cabinName + "】价格，如果不设置该舱位，请填写0", "提示");
+                    return;
+                }
+            });
+
+            //只有航班舱位ID数组、航班舱位座位数数组、航班舱位价格数组的长度相同才继续执行
+            if (cabinTypeIDs.length == seatNums.length && seatNums.length == cabinPrices.length) {
+                //console.log(cabinTypeIDs);
+                //console.log(seatNums);
+                //console.log(cabinPrices);
+
+                //获取是新增还是修改
+                var formInsertOrUpdate = $("#formInsertOrUpdate").val();
+                if (formInsertOrUpdate == "insert") {
+                    $.post("@Url.Content("~/OthersMaintenance/FlightMaintain/InsertFlight")",
+                        {
+                            flightCode: flightCode,//航班号
+                            orangeID: orangeID,//航班起飞机场ID
+                            destinationID: destinationID,//航班目的机场ID
+                            flightDate: flightDate,//航班日期
+                            departureTime: departureTime,//航班起飞时间
+                            arrivalTime: arrivalTime,//航班达到时间
+                            planTypeID: planTypeID,//航班机型ID
+                            standardPrice: standardPrice,//航班标准价格
+                            cabinTypeIDs: cabinTypeIDs,//航班舱位-航班舱位类型ID
+                            seatNums: seatNums,//航班舱位-航班舱位座位数
+                            cabinPrices: cabinPrices//航班舱位-舱位价格
+                        },
+                        function(msg) {
+                            myAlert(msg.Text, "提示");
+                            if (msg.State) {
+                                $("#btnSearch").click();//重新调用查询按钮 刷新表格
+                                $('#modalFlight').modal('hide');//隐藏Modal
+                            }
+                        }
+                    );
+                } else if (formInsertOrUpdate == "update") {
+                    var flightID = $('#frmFlight [name="flightID"]').val();//航班ID
+                    $.post("@Url.Content("~/OthersMaintenance/FlightMaintain/UpdateFlight")",
+                        {
+                            flightID: flightID,//航班ID
+                            flightCode: flightCode,//航班号
+                            orangeID: orangeID,//航班起飞机场ID
+                            destinationID: destinationID,//航班目的机场ID
+                            flightDate: flightDate,//航班日期
+                            departureTime: departureTime,//航班起飞时间
+                            arrivalTime: arrivalTime,//航班达到时间
+                            planTypeID: planTypeID,//航班机型ID
+                            standardPrice: standardPrice,//航班标准价格
+                            cabinTypeIDs: cabinTypeIDs,//航班舱位-航班舱位类型ID
+                            seatNums: seatNums,//航班舱位-航班舱位座位数
+                            cabinPrices: cabinPrices//航班舱位-舱位价格
+                        },
+                        function(msg) {
+                            myAlert(msg.Text, "提示");
+                            if (msg.State) {
+                                $("#btnSearch").click();//重新调用查询按钮 刷新表格
+                                $('#modalFlight').modal('hide');//隐藏Modal
+                            }
+                        }
+                    );
+                }
+            }
+        }
+
+
+        //删除航班
+        function deleteFlight(flightID) {
+            //layer 询问框(询问内容，参数选项，确定按钮回调，[取消按钮回调])
+            layer.confirm('您确认要删除该航班吗？',
+                { icon: 3, title: '提示' },
+                function (index) {//确定按钮回调
+                    layer.close(index);//关闭询问框
+                    //发送请求
+                    $.post("@Url.Content("~/OthersMaintenance/FlightMaintain/DeleteFlightInfoByID")",//url
+                        {
+                            flightID: flightID
+
+                        },//参数
+                        function (msg) {//回调
+                            myAlert(msg.Text, "提示");
+                            if (msg.State) {
+                                $("#btnSearch").click();//重新调用查询按钮 刷新表格
+                            }
+                        });
+                }
+            );
+        }
+
+
+        //打开 自动生成航班
+        function openCreateFlightAuto() {
+            window.location.replace("@Url.Content("~/OthersMaintenance/FlightMaintain/CreateFlightAuto")");
+        }
+
+
+
+        function flightTimeToStr(flightTime) {
+            var str = "";
+            //起飞时间 小数
+            str += flightTime.Hours < 10 ? "0" : "";
+            str += flightTime.Hours + ":";
+            //起飞时间 分钟
+            str += flightTime.Minutes < 10 ? "0" : "";
+            str += flightTime.Minutes;
+            return str;
+        }
+    </script>
+</body>
+</html>

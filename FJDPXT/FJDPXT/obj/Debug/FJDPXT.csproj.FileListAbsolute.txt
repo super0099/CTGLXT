@@ -1,0 +1,74 @@
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\roslyn\csc.exe
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\roslyn\vbc.exe
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\roslyn\VBCSCompiler.exe
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\FJDPXT.dll.config
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\FJDPXT.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\FJDPXT.pdb
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\System.Web.Helpers.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\System.Web.Mvc.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\System.Web.Razor.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\System.Web.Webpages.Deployment.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\System.Web.Webpages.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\System.Web.Webpages.Razor.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\System.Web.Razor.xml
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\System.Web.Webpages.xml
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\System.Web.Webpages.Deployment.xml
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\System.Web.Webpages.Razor.xml
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\System.Web.Helpers.xml
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\System.Web.Mvc.xml
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\obj\Debug\FJDPXT.csprojResolveAssemblyReference.cache
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\obj\Debug\FJDPXT.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\obj\Debug\FJDPXT.pdb
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\EntityFramework.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\EntityFramework.SqlServer.dll
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\EntityFramework.xml
+C:\Users\007super\Desktop\study vs\FJDPXT\FJDPXT\bin\EntityFramework.SqlServer.xml
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\obj\Debug\FJDPXT.csprojResolveAssemblyReference.cache
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\obj\Debug\FJDPXT.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\obj\Debug\FJDPXT.pdb
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\roslyn\csc.exe
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\roslyn\Microsoft.CodeAnalysis.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\roslyn\Microsoft.CSharp.Core.targets
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\roslyn\Microsoft.VisualBasic.Core.targets
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\roslyn\System.Collections.Immutable.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\roslyn\System.Reflection.Metadata.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\roslyn\vbc.exe
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\roslyn\VBCSCompiler.exe
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\roslyn\VBCSCompiler.exe.config
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\FJDPXT.dll.config
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\FJDPXT.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\FJDPXT.pdb
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\EntityFramework.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\EntityFramework.SqlServer.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\Microsoft.Web.Infrastructure.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\System.Web.Helpers.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\System.Web.Mvc.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\System.Web.Razor.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\System.Web.Webpages.Deployment.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\System.Web.Webpages.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\System.Web.Webpages.Razor.dll
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\EntityFramework.xml
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\EntityFramework.SqlServer.xml
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\System.Web.Razor.xml
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\System.Web.Webpages.xml
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\System.Web.Webpages.Deployment.xml
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\System.Web.Webpages.Razor.xml
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\System.Web.Helpers.xml
+F:\重装电脑需要转移的文件\飞机订票项目\FJDPXT\FJDPXT\bin\System.Web.Mvc.xml

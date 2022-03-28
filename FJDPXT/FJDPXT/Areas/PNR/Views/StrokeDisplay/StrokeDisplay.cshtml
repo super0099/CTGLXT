@@ -1,0 +1,144 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>行程查询</title>
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-4.1.3-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/app-assets/fonts/simple-line-icons/style.css" rel="stylesheet">
+    <style>
+        div{
+            font-family: "华文彩云";
+        }
+        h4{
+            font-family: "华文彩云";
+        }
+        h5{
+            font-family: "华文彩云";
+        }
+        p{
+            font-family: "华文彩云";
+        }
+         label{
+            font-family: "华文彩云";
+        }
+        input{
+            font-family: "华文彩云";
+        }
+        tr{
+            font-family: "华文彩云";
+        }
+        td{
+            font-family: "华文彩云";
+        }
+        th{
+            font-family: "华文彩云";
+        }
+        b{
+            font-family: "华文彩云";
+        }
+        button{
+            font-family: "华文彩云";
+        }
+        a{
+            font-family: "华文彩云";
+        }
+        h2{
+            font-family: "华文彩云";
+        }
+        dd{
+            font-family: "华文彩云";
+        }
+        span{
+            font-family: "华文彩云";
+        }
+        select{
+            font-family: "华文彩云";
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <h2>行程显示</h2>
+            </div>
+        </div>
+        @*查询表单*@
+        <div class="row justify-content-center mt-4">
+            <div class="col-12 col-md-10 col-lg-8">
+                <form>
+                    <div class="form-row justify-content-center">
+                        <label class="col-form-label col-2 col-sm-2 col-lg-1">PNR:</label>
+                        <div class="col-6 col-sm-4 col-lg-2">
+                            <input type="text" class="form-control" placeholder="请输入PNR" id="PNRNo" />
+                        </div>
+                    </div>
+
+                    <div class="form-row justify-content-center mt-3">
+                        <div class="col-4 col-sm-3 col-md-2">
+                            <button type="button" class="btn btn-primary btn-block" id="searchPNRStroke">查看PNR行程</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/bootstrap-4.1.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/layui/layui.js"></script>
+    <script src="~/Content/js/customfunction.js"></script>
+    <script>
+        var layer;
+
+        $(function () {
+            layui.use(['layer'], function () {
+                layer = layui.layer;
+            });
+
+            //查看PNR行程按钮点击事件
+            $("#searchPNRStroke").click(function () {
+                //获取PNR编号
+                var PNRNo = $("#PNRNo").val();
+
+                //数据验证
+                if (PNRNo == undefined || PNRNo == "") {
+                    myAlert("请输入要打印行程单的PNR");
+                    return;
+                }
+
+                //提交请求
+                var layerIndex = layer.load();
+                $.post("SelectPNRIDByNo", { PNRNo: PNRNo }, function (jsonData) {
+                    layer.close(layerIndex);
+                    if (jsonData.State) {
+                        //获取PNRID
+                        var PNRID = jsonData.Object;
+
+                        //判断
+                        if (PNRID != null && PNRID != "" && PNRID != undefined) {
+                            //清除输入的PNRNo
+                            $("#PNRNo").val("");
+                            console.log(PNRID);
+                            //在浏览器中打开打印行程的页面
+                            window.open("checkFlight?PNRID=" + PNRID, "_blank");
+                        }
+                        else {
+                            myAlert("输入的PNR不存在，请检查！");
+                        }
+                    }
+                    else {
+                        myAlert(jsonData.Text);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
