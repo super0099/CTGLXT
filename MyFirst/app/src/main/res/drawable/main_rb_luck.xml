@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--被主页延伸出来,选中和不选中的显示-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:drawable="@mipmap/ib_luck_focus"/>
+    <item android:state_checked="false" android:drawable="@mipmap/ib_luck_normal"/>
+    <item android:drawable="@mipmap/ib_luck_normal"/>
+</selector>
