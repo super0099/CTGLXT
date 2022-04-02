@@ -1,0 +1,141 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+a {
+    text-decoration: none;
+    color: #000000;
+}
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.clearfix {
+    zoom: 1;
+}
+body{
+    background: url("../img/背景.jpg");
+    background-size: cover;
+}
+.login{
+    margin: 0 auto;
+    width: 303px;
+    height: 340px;
+    /*    text-align: center;*/
+    background: #FFFFFF;
+}
+.head{
+    width: 270px;
+    height: 60px;
+    margin: 100px auto 50px auto;
+    color: #eb7350;
+}
+.head-a p{
+    font-size: 15px;
+}
+.head-a b{
+    font-size: 28px;
+}
+.head-b{
+    margin-top: 7px;
+}
+.head-b p{
+    font-size: 10px;
+}
+.head-b b{
+    font-size: 19px;
+}
+.head-c{
+    margin-top: 6px;
+    margin-left: 7px;
+    width: 2px;
+    height: 80%;
+    border-radius: 1px;
+    background: #FFFFFF;
+}
+.head-d p{
+    margin:10px;
+}
+.head-d span{
+    margin:10px;
+}
+.top-a{
+    text-align: center;
+    width: 100%;
+    height: 30%;
+    background-color:rgba(0,0,0,0.5);
+    background-size: 100% 100%;
+}
+.top-a h1{
+    display: inline-block;
+    margin: 23px auto;
+    font-size: 45px;
+    color: coral;
+}
+.head-d{
+    position: relative;
+    margin-top: 25px;
+}
+.input-b{
+    height: 35px;
+    width: 53%;
+    border-radius: 2px;
+    border: 1px solid #000000;
+}
+.input-a{
+    width: 140px;
+}
+.line{
+    display: inline-block;
+    width: 70px;
+    height: 2px;
+    border-radius: 1px;
+    background: #FFFFFF;
+    margin: 10px auto;
+}
+/*登录*/
+.logon{
+    width: 99%;
+    height: 30px;
+    border-radius: 3px;
+    background: blue;
+    border:1px solid blue;
+    color: #FFF;
+}
+.input-a{
+    height: 35px;
+    width: 99%;
+    border-radius: 2px;
+    border: 1px solid #000000;
+}
+.head-d span img{
+    position: absolute;
+    width: 33%;
+    height: 35px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-left: 6%;
+    border: 1px solid #000;
+    /*    margin-top: 20px;*/
+}
+.div-a{
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+.bt{
+    margin-top: 80px;
+    text-align: center;
+}
+.bt span{
+    color: #FFFFFF;
+    font-size: 12px;
+}

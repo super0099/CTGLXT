@@ -1,0 +1,171 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+a{
+    text-decoration:none;
+    color:white;
+}
+li{
+    list-style: none;
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.clearfix {
+    zoom: 1;
+}
+.content{
+    position: relative;
+    width: 100%;
+    height: 760px;
+}
+.top{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background: black;
+    color: #FFFFFF;
+}
+.topLeft{
+    margin-left: 50px;
+}
+.topLeft img{
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+.topAuto span{
+    margin-right: 10px;
+}
+.topright{
+    margin-right: 50px;
+}
+.topright a{
+    margin-left: 10px;
+}
+.logo{
+    width: 100%;
+    height: 100px;
+    border-bottom: 3px solid red;
+    background: #FFFFFF;
+}
+.logoImg{
+    margin-top: 10px;
+    margin-left: 50px;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    background: url("../img/龙.png");
+    background-size: cover;
+    border: 1px solid red;
+    margin-right: 15px;
+}
+.logoName p{
+    margin-top: 15px;
+    font-size: 32px;
+    color: #FF5722;
+}
+.logoName span{
+    font-size: 12px;
+}
+.navigation{
+    width: 100%;
+    height: 30px;
+    background: #e8e8e8;
+    line-height: 30px;
+}
+.navigation a{
+    margin-left: 55px;
+    color: #eb7350;
+}
+.headline{
+    margin: 15px auto;
+    width: 95%;
+    height: 30px;
+}
+.headline li{
+    float: left;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+.carContent{
+    margin: 0 auto;
+    width: 95%;
+    height: 450px;
+    border: 1px solid #C2BE9E;
+    overflow-y: auto;
+}
+.carMenu{
+    width: 100%;
+    height: 100px;
+}
+.carMenu li{
+    float: left;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+.MenuImg{
+    width: 100px;
+    height: 80px;
+    margin: 10px 10px 10px 45px;
+}
+.minusFl{
+    width: 25px;
+    height: 24px;
+    display: inline-block;
+    background: url("../img/减.jpg");
+    background-size: 100%;
+    cursor: pointer;
+    position: absolute;
+    top: 39px;
+    left: 80px;
+    border: 1px solid #000000;
+}
+.quantity{
+    width: 60px;
+    height: 26px;
+    outline: none;
+    text-align: center;
+}
+.pushFr{
+    width: 25px;
+    height: 24px;
+    display: inline-block;
+    background: url("../img/加.jpg");
+    background-size: 100%;
+    cursor: pointer;
+    position: absolute;
+    top: 39px;
+    left: 163px;
+    border: 1px solid #000000;
+}
+.Settlement{
+    margin: 15px auto;
+    width: 95%;
+    height: 40px;
+}
+.Settlement button{
+    width: 120px;
+    height: 40px;
+    float: right;
+    background: #1E9FFF;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    color: #FFFFFF;
+    cursor: pointer;
+}

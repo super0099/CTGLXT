@@ -1,0 +1,56 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.clearfix {
+    zoom: 1;
+}
+body{
+    background: url("../img/2.jpg");
+    background-size: 100% 100%;
+}
+.content{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+.Wmethod{
+    position: absolute;
+    top: 42%;
+    left: 35%;
+    width: 150px;
+    height: 110px;
+    border-radius: 10px;
+    background: url("../img/外卖.gif");
+    background-size: 100% 100%;
+    cursor:pointer;
+    border: none;
+    outline: none;
+    font-family: "楷体";
+}
+.Nmethod{
+    position: absolute;
+    top: 42%;
+    right: 35%;
+    background: url("../img/商店.jpg");
+    background-size: 100%;
+    border-radius: 10px;
+    width: 150px;
+    height: 110px;
+    cursor:pointer;
+    font-family: "楷体";
+    border: none;
+    outline: none;
+}

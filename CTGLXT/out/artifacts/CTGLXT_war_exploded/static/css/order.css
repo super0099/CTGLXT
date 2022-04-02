@@ -1,0 +1,110 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+.order-headline li{
+    list-style: none;
+    float:left;
+    text-align: center;
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.clearfix {
+    zoom: 1;
+}
+.order{
+    width: 100%;
+    height: 100vh;
+    background: #FFFFFF;
+}
+.order-top{
+    width: 95%;
+    margin: 0 auto;
+    height: 50px;
+    border-bottom: 1px solid #999999;
+}
+.order-top p{
+    margin-left: 10px;
+    width: 145px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+}
+.order-headline{
+    margin: 55px auto 0;
+    width: 95%;
+    height: 30px;
+    line-height: 30px;
+    background: #C2BE9E;
+}
+.order-content{
+    width: 95%;
+    height: 442px;
+    margin: 0 auto;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.orders{
+    width: 100%;
+    height: 80px;
+}
+.orders p{
+    font-size: 12px;
+}
+.orders li{
+    height: 100px;
+    float: left;
+    list-style: none;
+    text-align: center;
+}
+.order li img{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+}
+.menuCont{
+    width: 340px;
+    height: 20px;
+    overflow: hidden;
+}
+.order-content{
+
+}
+.order-s{
+    display: inline-block;
+    width: 70%;
+    float: left;
+    margin-left: 20px;
+    margin-top: 26px;
+}
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+    width:6px;
+    background: rgba(0,0,0,0);
+    border-radius: 3px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    border-radius:10px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius:3px;
+    background: #C2BE9E;
+}

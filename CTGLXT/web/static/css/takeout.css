@@ -1,0 +1,326 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+a{
+    text-decoration:none;
+    color:white;
+}
+li{
+    list-style: none;
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.clearfix {
+    zoom: 1;
+}
+.content{
+    position: relative;
+    width: 100%;
+    height: 763px;
+}
+.top{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background: black;
+    color: #FFFFFF;
+}
+.topLeft{
+    margin-left: 50px;
+}
+.topLeft img{
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+.topAuto span{
+    margin-right: 10px;
+}
+.topright{
+    margin-right: 50px;
+}
+.topright a{
+    margin-left: 10px;
+}
+.logo{
+    width: 100%;
+    height: 100px;
+    border-bottom: 3px solid red;
+}
+.logoImg{
+    margin-top: 10px;
+    margin-left: 50px;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    background: url("../img/龙.png");
+    background-size: cover;
+    border: 1px solid red;
+    margin-right: 15px;
+}
+.logoName p{
+    margin-top: 15px;
+    font-size: 32px;
+    color: #FF5722;
+}
+.logoName span{
+    font-size: 12px;
+}
+.navigation{
+    width: 100%;
+    height: 30px;
+    background: #e8e8e8;
+    line-height: 30px;
+}
+.navigation a{
+    margin-left: 55px;
+    color: #eb7350;
+}
+.screen{
+    width: 100%;
+    height:40px;
+    line-height: 40px;
+}
+.gather{
+    margin-left: 50px;
+}
+.gather li{
+    text-align: center;
+    width: 40px;
+    height: 20px;
+    float: left;
+    cursor: pointer;
+}
+.gather li:hover{
+    color: #FF5722;
+}
+.search{
+    margin-top: 10px;
+}
+.screen i{
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 50px;
+    width: 20px;
+    height: 20px;
+    background: url("../img/搜索.gif");
+    background-size: cover;
+}
+.view{
+    width: 90%;
+    margin: 0 auto;
+    height: 540px;
+    overflow: hidden;
+    overflow:auto;
+}
+.menu{
+    position: relative;
+    float: left;
+    width: 205px;
+    height: 200px;
+    margin: 10px 10.2px;
+}
+.menuImg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.show{
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 2;
+    color: #FFFFFF;
+}
+.show p{
+    margin-top: 80px;
+}
+.Add i{
+    cursor:pointer;
+    margin-top: 20px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+.Add a{
+    cursor:pointer;
+    margin-top: 20px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+.Add i{
+    background: url("../img/购物车.gif");
+    background-size: cover;
+}
+.Add a{
+    background: url("../img/搜索.gif");
+    background-size: cover;
+}
+.shoppingCar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+.CarContent{
+    width: 500px;
+    height: 350px;
+    background: #FFFFFF;
+    margin: 400px 0 0 980px;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+}
+.Cartop{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    border-bottom: 1px solid #4E5465;
+    margin-bottom: 20px;
+}
+.Cartop i{
+    display: inline-block;
+    position: absolute;
+    top:5px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    background: url("../img/关闭.gif");
+    background-size: 100% 100%;
+}
+.Cartop p{
+    margin-left: 10px;
+}
+.Carbody{
+    width: 95%;
+    height: 250px;
+    margin: 0 auto;
+    overflow-y: auto;
+}
+.Carbody img{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+.Carbody span{
+    margin: 40px 10px 0 10px;
+    max-height: 20px;
+    max-width: 50px;
+}
+.Carbody-1{
+    height: 100px;
+    line-height: 100px;
+    position: relative;
+    margin-left: 10px;
+}
+.push{
+    display: inline-block;
+    border: 1px solid black;
+    width: 20px;
+    height: 22px;
+    background: url("../img/减.jpg");
+    background-size: cover;
+}
+.minus{
+    display: inline-block;
+    border: 1px solid black;
+    width: 20px;
+    height: 22px;
+    background: url("../img/加.jpg");
+    background-size: cover;
+}
+.Carbody-1 input{
+    width: 45px;
+    height: 24px;
+    outline: none;
+    margin-left: 29px;
+    text-align: center;
+}
+.Carbody-1 p{
+    display: inline-block;
+    margin-left: 100px;
+    font-size: 17px;
+}
+.Carbody-1 i{
+    position: absolute;
+    top: 40px;
+    left: 35px;
+}
+.Cartail{
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    top: 300px;
+
+}
+.Cartail-1{
+    width: 100%;
+    height: 100%;
+    background: #1E9FFF;
+    text-align: center;
+    border-radius: 0 0 0 10px;
+    line-height: 50px;
+    font-size: 18px;
+}
+.Cartail-1 input{
+    position: absolute;
+    top: 10px;
+    left: 290px;
+    border: none;
+    outline: none;
+    width: 70px;
+    height: 32px;
+    background: #1E9FFF;
+    font-size: 32px;
+}
+.Cartail img{
+    margin-top: 10px;
+    margin-left: 5%;
+    width: 90%;
+    height: 40px;
+    border-radius: 0 0 10px 0;
+    display: inline-block;
+}
+.close{
+    width: 15%;
+    height: 50px;
+    z-index: 20;
+}
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+    width:12px;
+    background-color: aqua;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    border-radius:10px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius:10px;
+    background:black;
+}
